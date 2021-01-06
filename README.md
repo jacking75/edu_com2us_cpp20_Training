@@ -18,6 +18,7 @@
 - [선택문 최적화를 위한 [[likely]], [[unlikely]] ](https://blog.naver.com/nsun527/221834414761 )
 - [우주선 연산자에대해 연구를 해보았다](https://blog.naver.com/shk5646/222105348582 )
 - [<=> 연산자 탐방](https://blog.naver.com/nsun527/221834414761)
+- [(일어) 우주선 연산자의 폴백 처리](https://onihusube.hatenablog.com/entry/2019/11/17/014040 )
   
   
 ### std::format
@@ -54,10 +55,11 @@
 - [concepts를 이용한 String::Format](https://blog.naver.com/wkdghcjf1234/222176161232 )
 
 
-
-
-
-
+  
+### iterator
+- [(일어) C++20에서 iterator 행동 조사 방법](https://onihusube.hatenablog.com/entry/2020/12/11/000123 )
+- [(일어) C++20에서의 iterator_traits 사정](https://onihusube.hatenablog.com/entry/2020/12/14/002822  )
+- [(일어) C++17 iterator <=> C++20 iterator != 0](https://onihusube.hatenablog.com/entry/2020/12/27/150400  )
 
 
 
