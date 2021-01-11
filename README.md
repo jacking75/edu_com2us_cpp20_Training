@@ -16,18 +16,17 @@
 - [Designated Initializer ( 지정된 초기화 )](https://openmynotepad.tistory.com/64 )
 - [수학 상수](https://blog.naver.com/kmc7468/221843531555 )  
 - [선택문 최적화를 위한 [[likely]], [[unlikely]] ](https://blog.naver.com/nsun527/221834414761 )
-- [우주선 연산자에대해 연구를 해보았다](https://blog.naver.com/shk5646/222105348582 )
+- [우주선 연산자에 대해 연구를 해 보았다](https://blog.naver.com/shk5646/222105348582 )
 - [<=> 연산자 탐방](https://blog.naver.com/nsun527/221834414761)
 - [(일어) 우주선 연산자의 폴백 처리](https://onihusube.hatenablog.com/entry/2019/11/17/014040 )
 - [(일어) friend 지정된 함수 낸에서 구조화 속박을 상요하여 비 공개 멤버 변수에 접근 하는 것을 허용](http://secret-garden.hatenablog.com/entry/2019/12/04/194134 ) 
 - [new 식에서 배열 요소 수 추론](https://wandbox.org/permlink/V3cM89ZFnejoQuBp )
+- [scope 있는 열거 타입의 using 선언](https://wandbox.org/permlink/CgjcBMhZEsoCWft5 ) 
+    - namespace 처럼 `using enum EnumType;` 혹은 `using EnumType::enumerator` 로 하면 열거 값의 scpoe 지정을 생략 할 수 있다  
+- [소스 코드의 위치 정보를 반환하는 `std::source_location`](https://wandbox.org/permlink/FdbTYOnyvTERIkql )  
+- [안전한 정수 타입 비교](https://wandbox.org/permlink/GVE2g4GWu7TCVTHw )
+    - `std::cmp_equal`, `std::cmp_not_equal`, `std::cmp_less`, `std::cmp_greater`, `std::cmp_less_equal`, `std::cmp_greater_equal`, `std::in_range`
   
-(working) スコープ付き列挙型のusing宣言
-https://cpprefjp.github.io/lang/cpp20/using_enum.html
-
-(working) ソースコードの位置情報を返すライブラリを追加 
-http://secret-garden.hatenablog.com/entry/2019/12/13/212815 
-
 (working) C++20便利機能の紹介：文字列チェック三銃士(2/3) starts_with, ends_with
 https://qiita.com/yohhoy/items/c86916ac9e86928eb147 
 
