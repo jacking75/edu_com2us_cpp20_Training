@@ -40,30 +40,24 @@
     - UTF-8로 엔코딩된 문자여을 저장하는 것을 생각한 타입으로 부호 없는 문자열 타입 char8_t 타입이다
     - `char8_t` 타입은 `unsigned char` 타입과 같은 크기, 얼라이먼트, 정수 변환 순위이지만 독립된 타입이고, `char` 나 `unsigned char` 와 오버로드로 구별된다
     - `u8` 플레이스 홀드가 붙은 문자열/(raw) 문자열 리터럴 타입도 `char/const char[n]`에서 `char8_t/const char8_t [n]`로 변경된다.
-
-    
-(working) コンパイル時に評価されたかどうかを判別出来る関数を追加 
-http://secret-garden.hatenablog.com/entry/2019/12/11/212905
-
-(working) 連想コンテナにある要素が含まれているかを判定するメンバ関数を追加 
-http://secret-garden.hatenablog.com/entry/2019/12/12/000143 
-  
-(working) 丸カッコの値リストからの集成体初期化を許可
-https://cpprefjp.github.io/lang/cpp20/allow_initializing_aggregates_from_a_parenthesized_list_of_values.html
-
+- [`std::is_constant_evaluated()`: 컴파일 시에 평가 되는 여부를 판별하는 함수](https://wandbox.org/permlink/VhaiQ30YCcav5Zj1 )
+    - 컴파일 시에 평가 되는 경우 true를 반환, 실행 시에 평가 되는 경우는 false를 반환.
+- [`contains` 연상 컨테이너에 어떤 요소가 있는가를 판정하는 멤버 함수](https://wandbox.org/permlink/t73hAgOVsbJEV0wp )
+- [소괄호의 값 리스트에서 집성체(구조체, 배열) 초기화 허가](https://wandbox.org/permlink/BTJJE1m5GQ1omOCi )  
 - [(일어) 우주선 연산자의 폴백 처리](https://onihusube.hatenablog.com/entry/2019/11/17/014040 )
 - [(일어) friend 지정된 함수 낸에서 구조화 속박을 상요하여 비 공개 멤버 변수에 접근 하는 것을 허용](http://secret-garden.hatenablog.com/entry/2019/12/04/194134 )   
 - [(일어) range based for이 커스텀 마이션 포인트를 발견하는 rule을 완화](https://cpprefjp.github.io/lang/cpp20/relaxing_the_range_for_loop_customization_point_finding_rules.html )
   
-
+  
   
 ### Lambda
-- (working)Template Parameter for Lambdas  http://www.modernescpp.com/index.php/more-powerful-lambdas-with-c-20   
-- (working)状態を持たないラムダ式がデフォルト構築可能、代入可能となった  http://secret-garden.hatenablog.com/entry/2019/12/24/000739   
-- (working)ジェネリックラムダのテンプレート構文  http://secret-garden.hatenablog.com/entry/2019/12/09/201235   
-  
-  
-  
+- [제너릭 람다의 템플릿 구문](https://wandbox.org/permlink/ZY7ycMzi1rcrDA3a )
+     - [Template Parameter for Lambdas](http://www.modernescpp.com/index.php/more-powerful-lambdas-with-c-20  ) 
+- [상태를 가지지 않는 람다식은 default 생성, 대입 가능](https://wandbox.org/permlink/hdz8PseVtgk30BEP )
+    - [예)std::map의 생성자에 비교 함수를 넘길 때 사용](https://wandbox.org/permlink/V6rSAIxF2rcoNaTq )
+    
+   
+    
 ### Span 
 - (working) https://cpprefjp.github.io/reference/span.html
 - (working)C++20 span tutorial  https://solarianprogrammer.com/2019/11/03/cpp-20-span-tutorial/     
@@ -99,8 +93,8 @@ https://cpprefjp.github.io/lang/cpp20/allow_initializing_aggregates_from_a_paren
 ### constexpr, consteval, constinit
 - [constexpr을 넘어선 consteval](https://blog.naver.com/nsun527/221834432741 )
 - [constexpr, consteval, constinit](https://blog.naver.com/kmc7468/221705880457 )
-- (working) constinit consteval constexpr constの違い  https://gununu.hatenadiary.jp/entry/2019/10/15/020903   
-- (working) 定数式からの仮想関数の呼び出しを許可  http://secret-garden.hatenablog.com/entry/2019/12/06/232434 
+- (일어) constinit, consteval, constexpr, const 차이](https://gununu.hatenadiary.jp/entry/2019/10/15/020903   )  
+- [정수식에서 가상함수 호출을 허가](https://wandbox.org/permlink/1fV60owHXyRWWk6Z )
   
 
   
