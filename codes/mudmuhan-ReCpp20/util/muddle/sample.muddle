@@ -1,0 +1,38 @@
+; Macro and Site specification file for MUDDLE
+; This file should be customized to your needs and then renamed .muddle
+; These are the sites:
+site="Isengard"         addr="128.200.21.101"      port="4040" init="Guest"
+
+; These are the macros.
+;
+;	$[1-9] cause your player on connection #[1-9] to perform the
+;	       following commands
+;	$* causes all your connected players to perform the following
+;	       commands
+;	%[1-9] These are just variable name placeholders for a SINGLE
+;	       whitespace-separated word.
+;       %* This is a variable name placeholder for all text that follows.
+;	^[A-Z] These are control characters.  Use ^J for carriage return.
+;
+in="Guest"	out="guest^Jpassword^Jwho^J"
+in="cc"		out="$2cast vigor aragorn^J"
+in="ccc"	out="$2cast vigor finduril^J"
+in="g"		out="$2get all corpse^J"
+in="j"		out="$2junk corpse^J"
+in="jj %1"	out="get %1 corpse^Jdrop %1^Jjunk %1^J"
+in="armor"	out="$2cast 'armor' aragorn^Jcast 'armor' finduril^J"
+in="k %*"	out="$*kill %*^J"
+in="f %1"	out="$2cast 'fae' %1^J"
+in="rec"	out="$*quaff blue^J"
+in="grp"	out="$2follow garth^J$1group aragorn^J$1group finduril^J"
+in="all %*"	out="$*%*^J"
+
+; These are the automatons.  They automatically respond to text messages
+; your characters receive.
+
+;
+auto="You are hungry"		out="get bread bag^Jeat bread^J"
+auto="You are thirsty"		out="drink waterskin^J!^J"
+auto="BLEEDING so"		out="$*quaff blue^J"
+auto="$2tells you"		out="tell player1 ***I got a msg from 2***^J"
+auto="$3tells you"		out="tell urine ***I got a msg from 3***^J"

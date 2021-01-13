@@ -1,0 +1,17 @@
+Muddle
+------
+
+	Muddle is a MUD client written by Brett Vickers (bvickers@uci.edu)
+to use with Mordor (mud server).  It will work with many other types of
+mud servers as well.  Everything is included here that is necessary for
+you to create your own binary version.  It supports multiple connections,
+macros, and limited bot capabilities. 
+
+	This software is known to work on SunOS 4.0, FreeBSD, and Linux.
+Just type 'make' and you should shortly have a working version.
+	This program looks for a file named '.muddle' which configures 
+your sites, macros, and bots.  Use the sample.muddle file as a template 
+for your personalized .muddle.	
+	If you find this program useful, drop Brett a note thanking him 
+for his efforts.  If you have questions about this distribution, mail 
+brooke@moria.bio.uci.edu.

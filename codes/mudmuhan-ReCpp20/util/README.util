@@ -1,0 +1,11 @@
+
+UTILITIES --
+This is where the utility source code is.  You will definitely
+need the editor at least, and it should compile with a simple 'make'. 
+Also included here is the list command which allows you to look at the 
+database on line.  You need to compile it and put it in the bin directory 
+if you want to examine the database while online.
+Message is a simple program that outputs a message when someone connets 
+to a port. You can use it to put up a message on the game port when you 
+are down for whatever reason.
+Italk and muddle are both clients.
