@@ -51,7 +51,7 @@
   
   
 ### Lambda
-- [제너릭 람다의 템플릿 구문](https://wandbox.org/permlink/ZY7ycMzi1rcrDA3a )
+- [제너릭 람다의 템플릿 구문](https://wandbox.org/permlink/8kcCAfMugsmqsyaF )
      - [Template Parameter for Lambdas](http://www.modernescpp.com/index.php/more-powerful-lambdas-with-c-20  ) 
 - [상태를 가지지 않는 람다식은 default 생성, 대입 가능](https://wandbox.org/permlink/hdz8PseVtgk30BEP )
     - [예)std::map의 생성자에 비교 함수를 넘길 때 사용](https://wandbox.org/permlink/V6rSAIxF2rcoNaTq )
@@ -59,19 +59,17 @@
    
     
 ### Span 
-- (working) https://cpprefjp.github.io/reference/span.html
-- (working)C++20 span tutorial  https://solarianprogrammer.com/2019/11/03/cpp-20-span-tutorial/     
-    
+- 작업 문서 링크할 예정    
 	
 	
 ### std::format
-- [printf 쓰지 마세요! std::format](https://blog.naver.com/nsun527/221834454953 )
+(2021.01.14) 아직 컴파일러에서 구현하지 않았음  
+  
+- [printf 쓰지 마세요! std::format](hthttps://karupro.tistory.com/12 )
 - [std::format](https://blog.naver.com/kmc7468/221707892020 )
 - [std::format 사용해보기(?)](https://blog.naver.com/nortul/222092094688 )
-- (working)  https://cpprefjp.github.io/reference/format.html
-- (working)An Extraterrestrial Guide to C++20 Text Formatting  https://www.bfilipek.com/2020/02/extra-format-cpp20.html   
-- (working)新しいフォーマットライブラリ <format> が追加   https://qiita.com/advent-calendar/2019/cpp20_pink_bangbi   
-    
+- [An Extraterrestrial Guide to C++20 Text Formatting](https://www.bfilipek.com/2020/02/extra-format-cpp20.html  )  
+     
    
   
 ### [ Chrono ]
@@ -156,7 +154,7 @@
     
     
    
-### [C++20 std::Range ]
+### std::Range
 - (working)範囲ライブラリとして <ranges> が追加される  http://secret-garden.hatenablog.com/entry/2019/12/21/224438 
 - (working)Visual Studio Community 2019 PreviewでC++20 Rangesの主要部分がサポートされた  https://qiita.com/katabamisan/items/407b472596c98fcc5226 
 - (working)範囲ライブラリ (C++20)  https://ja.cppreference.com/w/cpp/ranges 
@@ -213,5 +211,10 @@
 - [Coroutine ( 코루틴 ) - 1](https://openmynotepad.tistory.com/65 )
 - [Coroutine ( 코루틴 ) - 2](https://openmynotepad.tistory.com/66 )
 - [Coroutine ( 코루틴 ) - 3](https://openmynotepad.tistory.com/67 )
-  
+   
 
+<br/>  
+<br/>  
+   
+## 실습 
+- [Modernizing legacy code](https://mariusbancila.ro/blog/2021/01/15/modernizing-legacy-code/ )  
