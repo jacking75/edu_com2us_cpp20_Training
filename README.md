@@ -1,8 +1,11 @@
 # 컴투스 서버 프로그래머 C++20 학습 및 실습
-
+- [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support )
+  
+  
 ## 학습 자료
 - 웹에서 공개된 자료를 참고하여 정리했다.
     - https://cpprefjp.github.io/
+  
   
 ### Features Summary
 - [C++20 Key Features Summary](https://www.slideshare.net/utilforever/c20-key-features-summary )
@@ -45,7 +48,7 @@
 - [`contains` 연상 컨테이너에 어떤 요소가 있는가를 판정하는 멤버 함수](https://wandbox.org/permlink/t73hAgOVsbJEV0wp )
 - [소괄호의 값 리스트에서 집성체(구조체, 배열) 초기화 허가](https://wandbox.org/permlink/BTJJE1m5GQ1omOCi )  
 - [(일어) 우주선 연산자의 폴백 처리](https://onihusube.hatenablog.com/entry/2019/11/17/014040 )
-- [(일어) friend 지정된 함수 낸에서 구조화 속박을 상요하여 비 공개 멤버 변수에 접근 하는 것을 허용](http://secret-garden.hatenablog.com/entry/2019/12/04/194134 )   
+- [(일어) friend 지정된 함수 낸에서 구조화 속박을 상요하여 비 공개 멤버 변수에 접근 하는 것을 허용](http://secret-garden.hatenablog.com/entry/2019/12/04/194134 )  
 - [(일어) range based for이 커스텀 마이션 포인트를 발견하는 rule을 완화](https://cpprefjp.github.io/lang/cpp20/relaxing_the_range_for_loop_customization_point_finding_rules.html )
   
   
@@ -61,41 +64,30 @@
 ### Span 
 - 작업 문서 링크할 예정    
 	
-	
-### std::format
-(2021.01.14) 아직 컴파일러에서 구현하지 않았음  
+
+### constexpr, consteval, constinit
+- [constexpr을 넘어선 consteval](https://blog.naver.com/nsun527/221834432741 )
+- [constexpr, consteval, constinit](https://blog.naver.com/kmc7468/221705880457 )
+- [(일어) constinit, consteval, constexpr, const 차이](https://gununu.hatenadiary.jp/entry/2019/10/15/020903   )  
+- [정수식에서 가상함수 호출을 허가](https://wandbox.org/permlink/1fV60owHXyRWWk6Z )
   
-- [printf 쓰지 마세요! std::format](hthttps://karupro.tistory.com/12 )
-- [std::format](https://blog.naver.com/kmc7468/221707892020 )
-- [std::format 사용해보기(?)](https://blog.naver.com/nortul/222092094688 )
-- [An Extraterrestrial Guide to C++20 Text Formatting](https://www.bfilipek.com/2020/02/extra-format-cpp20.html  )  
-     
-   
-  
+	  
+	  
 ### [ Chrono ]
-- (working) https://cpprefjp.github.io/reference/chrono.html
-- (working)Calendar and Time-Zones in C++20: Time of Day http://www.modernescpp.com/index.php/calendar-and-time-zone-in-c-20 
-- (working)C++標準ライブラリの時計(Clock)  http://d.hatena.ne.jp/yohhoy/20180320/p1 
+- (working) https://cpprefjp.github.io/reference/chrono.html   https://wandbox.org/permlink/HTrpTtutkN3FKkOq  
 - (working)C++標準ライブラリのカレンダー(Calendar)  http://d.hatena.ne.jp/yohhoy/20180322/p1 
 - (working)C++標準ライブラリのタイムゾーン(Time Zone)  http://d.hatena.ne.jp/yohhoy/20180326/p1 
 - (working)C++20標準ライブラリ <chrono>ヘッダ Tips  https://qiita.com/yohhoy/items/8e751b019b369693f0f3 
+- (working)Calendar and Time-Zones in C++20: Time of Day http://www.modernescpp.com/index.php/calendar-and-time-zone-in-c-20 
   
   
   
 ### std::Bit 
 - (working) https://cpprefjp.github.io/reference/bit.html  
 - (working) <bit> in Visual Studio 2019 version 16.8 Preview 2  https://devblogs.microsoft.com/cppblog/bit-in-visual-studio-2019-version-16-8-preview-2/   
-  
-  
-  
-### constexpr, consteval, constinit
-- [constexpr을 넘어선 consteval](https://blog.naver.com/nsun527/221834432741 )
-- [constexpr, consteval, constinit](https://blog.naver.com/kmc7468/221705880457 )
-- (일어) constinit, consteval, constexpr, const 차이](https://gununu.hatenadiary.jp/entry/2019/10/15/020903   )  
-- [정수식에서 가상함수 호출을 허가](https://wandbox.org/permlink/1fV60owHXyRWWk6Z )
-  
-
-  
+    
+    
+	
 ### Concurrency
 - (working) Concurrency in C++20 and beyond  https://github.com/CppCon/CppCon2019/blob/master/Presentations/concurrency_in_cpp20_and_beyond/concurrency_in_cpp20_and_beyond__anthony_williams__cppcon_2019.pdf   
 - (working)C++20便利機能の紹介：自動joinスレッドと停止機構 std::jthread, stop_token  https://qiita.com/yohhoy/items/e493aeacef9a1f6315b9    
@@ -107,26 +99,7 @@
 - (working) C++20便利機能の紹介：同期出力ストリーム std::osyncstream  https://qiita.com/yohhoy/items/b0fa779176d5debcd09e 
     
   
-    
-### module
-- [module 사용해보기](https://speedr00t.tistory.com/768 )
-- (working) https://cpprefjp.github.io/lang/cpp20/modules.html  
-- (working)C++ にモジュールがやってくる！   http://secret-garden.hatenablog.com/entry/2019/12/23/212339 
-- (working)A Tour of C++ Modules in Visual Studio  https://devblogs.microsoft.com/cppblog/a-tour-of-cpp-modules-in-visual-studio/ 
-- (working)Standard C++20 Modules support with MSVC in Visual Studio 2019 version 16.8 https://devblogs.microsoft.com/cppblog/standard-c20-modules-support-with-msvc-in-visual-studio-2019-version-16-8/ 
-- (working)Visual C++ 2015 Update 1でC++にmoduleが試験的に実装された  http://nekko1119.hatenablog.com/entry/2015/12/02/070752 
-- (working)モジュール理論 基礎編  https://onihusube.hatenablog.com/entry/2019/07/07/025446  
-- (working)C++20 モジュールの概要 / Introduction to C++ modules (part 1) https://www.slideshare.net/TetsuroMatsumura/c20-152189285 
-- (working)続・モジュール / Introduction to C++ modules (part 2) https://www.slideshare.net/TetsuroMatsumura/introduction-to-c-modules-part-2-225829715   
-- (working)Modules in VC++ 2019 16.5  https://mariusbancila.ro/blog/2020/05/07/modules-in-vc-2019-16-5/ 
-- (working)C++20: A Simple math Module  http://www.modernescpp.com/index.php/cpp20-a-first-module  
-- (working)Practical C++ Modules  https://github.com/CppCon/CppCon2019/blob/master/Presentations/practical_cpp_modules/practical_cpp_modules__boris_kolpackov__cppcon_2019.pdf 
-- (working)モジュールへの移行を考える 1 - 単一ヘッダファイル+単一ソースファイル  https://zenn.dev/onihusube/articles/299ed7a3bc6062068fdd 
-- (working)モジュールへの移行を考える 2 - 実装の隠蔽について https://zenn.dev/onihusube/articles/7f1a6253b0683458b9d0 
-- (working)C＋＋20のモジュールとincludeの違いについて詳しく調べてみた  https://logicalbeat.jp/blog/6223/ 
-    
      
-   
 ### Concepts  
 - [Concepts ( 콘셉트, 개념 ) - 1](https://openmynotepad.tistory.com/69 )
 - [Concepts ( 콘셉트, 개념 ) - 2](https://openmynotepad.tistory.com/70 )
@@ -188,7 +161,35 @@
 - (working)<ranges>のviewを見る17 - elements_view  https://zenn.dev/onihusube/articles/9a13745c24b36b9bd753 
   
   
+### module
+- [module 사용해보기](https://speedr00t.tistory.com/768 )
+- (working) https://cpprefjp.github.io/lang/cpp20/modules.html  
+- (working)C++ にモジュールがやってくる！   http://secret-garden.hatenablog.com/entry/2019/12/23/212339 
+- (working)A Tour of C++ Modules in Visual Studio  https://devblogs.microsoft.com/cppblog/a-tour-of-cpp-modules-in-visual-studio/ 
+- (working)Standard C++20 Modules support with MSVC in Visual Studio 2019 version 16.8 https://devblogs.microsoft.com/cppblog/standard-c20-modules-support-with-msvc-in-visual-studio-2019-version-16-8/ 
+- (working)Visual C++ 2015 Update 1でC++にmoduleが試験的に実装された  http://nekko1119.hatenablog.com/entry/2015/12/02/070752 
+- (working)モジュール理論 基礎編  https://onihusube.hatenablog.com/entry/2019/07/07/025446  
+- (working)C++20 モジュールの概要 / Introduction to C++ modules (part 1) https://www.slideshare.net/TetsuroMatsumura/c20-152189285 
+- (working)続・モジュール / Introduction to C++ modules (part 2) https://www.slideshare.net/TetsuroMatsumura/introduction-to-c-modules-part-2-225829715   
+- (working)Modules in VC++ 2019 16.5  https://mariusbancila.ro/blog/2020/05/07/modules-in-vc-2019-16-5/ 
+- (working)C++20: A Simple math Module  http://www.modernescpp.com/index.php/cpp20-a-first-module  
+- (working)Practical C++ Modules  https://github.com/CppCon/CppCon2019/blob/master/Presentations/practical_cpp_modules/practical_cpp_modules__boris_kolpackov__cppcon_2019.pdf 
+- (working)モジュールへの移行を考える 1 - 単一ヘッダファイル+単一ソースファイル  https://zenn.dev/onihusube/articles/299ed7a3bc6062068fdd 
+- (working)モジュールへの移行を考える 2 - 実装の隠蔽について https://zenn.dev/onihusube/articles/7f1a6253b0683458b9d0 
+- (working)C＋＋20のモジュールとincludeの違いについて詳しく調べてみた  https://logicalbeat.jp/blog/6223/ 
   
+  
+  
+### std::format
+(2021.01.14) 아직 컴파일러에서 구현하지 않았음  
+  
+- [printf 쓰지 마세요! std::format](https://karupro.tistory.com/12 )
+- [std::format](https://blog.naver.com/kmc7468/221707892020 )
+- [std::format 사용해보기(?)](https://blog.naver.com/nortul/222092094688 )
+- [An Extraterrestrial Guide to C++20 Text Formatting](https://www.bfilipek.com/2020/02/extra-format-cpp20.html  )  
+    
+	
+  	 
 ### Template
 - [auto 파라메터에 의한 함ㅅ후 템플릿 간이 정의](https://wandbox.org/permlink/L4rPlrtsT6aK1d25 )
     - C++14에서 도입된 제너릭 람다처럼 보통 함수도 파라메터 타입을 auto로 하여 간단하게 함수 템플릿을 정의할 수 있다.
