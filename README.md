@@ -80,9 +80,8 @@
   
   
 ### std::Bit 
-- (working) https://cpprefjp.github.io/reference/bit.html  
-- (working) <bit> in Visual Studio 2019 version 16.8 Preview 2  https://devblogs.microsoft.com/cppblog/bit-in-visual-studio-2019-version-16-8-preview-2/   
-    
+- [bit](./bit.md)
+      
     
 	
 ### Concurrency
