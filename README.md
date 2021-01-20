@@ -93,6 +93,7 @@
 ### Concurrency
 - std::stop_token and std::jthread: (2020.01.20) Visual C++은 곧 출시 예정인 Visual Studio 16.9에서 지원 예정 
   
+- [Concurrency in C++20 and beyond (pdf)](https://github.com/CppCon/CppCon2019/blob/master/Presentations/concurrency_in_cpp20_and_beyond/concurrency_in_cpp20_and_beyond__anthony_williams__cppcon_2019.pdf  ) 
 - [thread Extensions in C++20](./thread_extensionCpp20.md)
 - (working) C++ Synchronized Buffered Ostream  http://d.hatena.ne.jp/yohhoy/20171121/p1     
 - (working) C++20便利機能の紹介：同期出力ストリーム std::osyncstream  https://qiita.com/yohhoy/items/b0fa779176d5debcd09e 
