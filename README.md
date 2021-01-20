@@ -1,5 +1,8 @@
 # 컴투스 서버 프로그래머 C++20 학습 및 실습
 - [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support )
+    - Visual C++ 19.28은 Visual Studio 16.9에 해당한다
+    - [Visual C++ 버전 별 Visual Studio 버전 테이블](https://docs.microsoft.com/ko-kr/cpp/error-messages/compiler-warnings/compiler-warnings-by-compiler-version?view=msvc-160 )
+    - [MS STL Changelog](https://github.com/microsoft/STL/wiki/Changelog )
   
   
 ## 학습 자료
@@ -66,6 +69,9 @@
 	
 
 ### constexpr, consteval, constinit
+- consteval: (2020.01.20) Visual C++은 Visual Studio 16.8에서 일부 구현
+- constinit: (2020.01.20) 아직 미구현  
+  
 - [constexpr을 넘어선 consteval](https://blog.naver.com/nsun527/221834432741 )
 - [constexpr, consteval, constinit](https://blog.naver.com/kmc7468/221705880457 )
 - [(일어) constinit, consteval, constexpr, const 차이](https://gununu.hatenadiary.jp/entry/2019/10/15/020903   )  
@@ -85,11 +91,16 @@
     
 	
 ### Concurrency
-- [chrono Extensions in C++20](./thread_extensionCpp20.md)
-    
+- std::stop_token and std::jthread: (2020.01.20) Visual C++은 곧 출시 예정인 Visual Studio 16.9에서 지원 예정 
+  
+- [thread Extensions in C++20](./thread_extensionCpp20.md)
+- (working) C++ Synchronized Buffered Ostream  http://d.hatena.ne.jp/yohhoy/20171121/p1     
+- (working) C++20便利機能の紹介：同期出力ストリーム std::osyncstream  https://qiita.com/yohhoy/items/b0fa779176d5debcd09e 
   
      
 ### Concepts  
+- (2020.01.20) Visual C++은 Visual Studio 16.3에서 일부 구현
+  
 - [Concepts ( 콘셉트, 개념 ) - 1](https://openmynotepad.tistory.com/69 )
 - [Concepts ( 콘셉트, 개념 ) - 2](https://openmynotepad.tistory.com/70 )
 - [Concepts ( 콘셉트, 개념 ) - 3](https://openmynotepad.tistory.com/71 )
@@ -117,6 +128,8 @@
     
    
 ### std::Range
+- (2020.01.20) Visual C++은 Visual Studio 16.8에서 대부분 구현
+  
 - (working)範囲ライブラリとして <ranges> が追加される  http://secret-garden.hatenablog.com/entry/2019/12/21/224438 
 - (working)Visual Studio Community 2019 PreviewでC++20 Rangesの主要部分がサポートされた  https://qiita.com/katabamisan/items/407b472596c98fcc5226 
 - (working)範囲ライブラリ (C++20)  https://ja.cppreference.com/w/cpp/ranges 
