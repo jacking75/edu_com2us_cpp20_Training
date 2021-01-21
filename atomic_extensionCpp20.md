@@ -70,54 +70,194 @@ int main()
  
 
 ##  std::atomic_wait
+이 함수는 블럭킹 동기를 하기 위한 기능이고, 비지 루프에 의한 폴링 보다 에너지 소비가 낮은 효율적인 대기를 구현할 수 있다.  
+이 함수에 의해 대기하면 이것을 깨워주는 함수는 atomic_notify_one(), atomic_notify_all() 이다.  
+  
+이 함수는 Windows에서는 WaitOnAddress() 함수, POSIX에서는 futex() 함수를 사용하고 있다.  
 
-https://cpprefjp.github.io/reference/atomic/atomic_wait.html
+```
+#include <iostream>
+#include <atomic>
+#include <thread>
 
+class my_mutex {
+  std::atomic<bool> state_{false}; // false:unlock, true:lock
+public:
+  void lock() noexcept {
+    while (std::atomic_exchange(&state_, true) == true) {
+      std::atomic_wait(&state_, true);
+    }
+  }
 
+  void unlock() noexcept {
+    std::atomic_store(&state_, false);
+    std::atomic_notify_one(&state_);
+  }
+};
+
+my_mutex mut;
+void print(int x) {
+  mut.lock();
+  std::cout << x << std::endl;
+  mut.unlock();
+}
+
+int main()
+{
+  std::thread t1 {[] {
+    for (int i = 0; i < 5; ++i) {
+      print(i);
+    }
+  }};
+  std::thread t2 {[] {
+    for (int i = 5; i < 10; ++i) {
+      print(i);
+    }
+  }};
+
+  t1.join();
+  t2.join();
+}
+```
+   
+출력  
+<pre>
+0
+5
+1
+6
+2
+7
+3
+8
+4
+9
+</pre>
+    
+  
 ## std::atomic_wait_explicit
-
-https://cpprefjp.github.io/reference/atomic/atomic_wait_explicit.html
-
+기능적으로 std::atomic_wait와 같다. 차이는 memory order 최적화를 할 수 있다.  
+```
+void lock() noexcept {
+  while (std::atomic_exchange_explicit(&state_, true, std::memory_order::acquire) == true) {
+    std::atomic_wait_explicit(&state_, true, std::memory_order::relaxed);
+  }
+}
+```
+  
+  
 ## std::atomic_notify_one
+`atomic_wait`로 대기 하고 있는 것 중 하나를 깨운다  
+```
+std::atomic_notify_one(&state_);
+```
 
-https://cpprefjp.github.io/reference/atomic/atomic_notify_one.html
 
 ## std::atomic_notify_all
-
-https://cpprefjp.github.io/reference/atomic/atomic_notify_all.html
-
-
+`atomic_wait`로 대기 하고 있는 것 모두를 깨운다  
+```
+std::atomic_notify_all(&state_);
+```
+  
+  
 ## std::atomic_flag_test
+현재 값을 bool 값으로 얻는다.  
+memory order이 memory_order_release, memory_order_acq_rel 에서는 사용 불가.  
+```
+#include <iostream>
+#include <atomic>
 
-https://cpprefjp.github.io/reference/atomic/atomic_flag_test.html
+int main()
+{
+  std::cout << std::boolalpha;
 
+  std::atomic_flag x = ATOMIC_FLAG_INIT;
+  std::cout << std::atomic_flag_test(&x) << std::endl;
 
+  std::atomic_flag_test_and_set(&x);
+  std::cout << std::atomic_flag_test(&x) << std::endl;
+}
+```
+  
+출력  
+<pre>
+false
+true
+</pre>
+  
+  
 ## std::atomic_flag_test_explicit
+현재 값을 bool 값으로 얻는다.  
+memory order이 memory_order_release, memory_order_acq_rel 에서는 사용 불가.  
+```
+#include <iostream>
+#include <atomic>
 
-https://cpprefjp.github.io/reference/atomic/atomic_flag_test_explicit.html
+int main()
+{
+  std::cout << std::boolalpha;
 
+  std::atomic_flag x = ATOMIC_FLAG_INIT;
+  std::cout << std::atomic_flag_test_explicit(&x, std::memory_order::acquire) << std::endl;
+
+  std::atomic_flag_test_and_set(&x, std::memory_order::release);
+  std::cout << std::atomic_flag_test_explicit(&x, std::memory_order::acquire) << std::endl;
+}
+```  
+  
 
 ## std::atomic_flag_wait
+`atomic_wait`와 비슷하며, atomic_flag_notify_one(), atomic_flag_notify_all() 함수로 대기에서 깨어난다.  
+```
+class my_mutex {
+  std::atomic_flag state_ = ATOMIC_FLAG_INIT; // clear:unlock, set:lock
+public:
+  void lock() noexcept {
+    while (std::atomic_flag_test_and_set(&state_)) {
+      std::atomic_flag_wait(&state_, true);
+    }
+  }
 
-https://cpprefjp.github.io/reference/atomic/atomic_flag_wait.html
-
-
+  void unlock() noexcept {
+    std::atomic_flag_clear(&state_);
+    std::atomic_flag_notify_one(&state_);
+  }
+};
+```
+  
+  
 ## std::atomic_flag_wait_explicit
+`std::atomic_flag_wait`와 같으면 momory order 지정이 가능.     
+```
+#include <iostream>
+#include <atomic>
+#include <thread>
 
-  https://cpprefjp.github.io/reference/atomic/atomic_flag_wait_explicit.html
+class my_mutex {
+  std::atomic_flag state_ = ATOMIC_FLAG_INIT; // clear:unlock, set:lock
+public:
+  void lock() noexcept {
+    while (std::atomic_flag_test_and_set_explicit(&state_, std::memory_order::acquire)) {
+      std::atomic_flag_wait_explicit(&state_, true, std::memory_order::relaxed);
+    }
+  }
 
-
+  void unlock() noexcept {
+    std::atomic_flag_clear_explicit(&state_, std::memory_order::release);
+    std::atomic_flag_notify_one(&state_);
+  }
+};
+```
+  
+  
 ## std::atomic_flag_notify_one
-
-https://cpprefjp.github.io/reference/atomic/atomic_flag_notify_one.html
-
-
+`atomic_flag_wait`에 의한 대기 상태에서 하나만 깨운다.  
+  
+  
 ## std::atomic_flag_notify_all
- 
- https://cpprefjp.github.io/reference/atomic/atomic_flag_notify_all.html 
-
-
-
+`atomic_flag_wait`에 의한 대기 상태에서 모두 깨운다.   
+  
+  
 ## 참고 사이트
 - https://cpprefjp.github.io/reference/atomic.html
 
