@@ -95,39 +95,9 @@
   
 - [Concurrency in C++20 and beyond (pdf)](https://github.com/CppCon/CppCon2019/blob/master/Presentations/concurrency_in_cpp20_and_beyond/concurrency_in_cpp20_and_beyond__anthony_williams__cppcon_2019.pdf  ) 
 - [thread Extensions in C++20](./thread_extensionCpp20.md)
-- (working) C++ Synchronized Buffered Ostream  http://d.hatena.ne.jp/yohhoy/20171121/p1     
-- (working) C++20便利機能の紹介：同期出力ストリーム std::osyncstream  https://qiita.com/yohhoy/items/b0fa779176d5debcd09e 
+- [C++ Synchronized Buffered Ostream std::osyncstream](https://docs.google.com/document/d/1-XIeNmpZhY2fGl2L8ySQit0HlkmtnuH-hyr_FTDlD04/edit?usp=sharing  )
   
      
-### Concepts  
-- (2020.01.20) Visual C++은 Visual Studio 16.3에서 일부 구현
-  
-- [Concepts ( 콘셉트, 개념 ) - 1](https://openmynotepad.tistory.com/69 )
-- [Concepts ( 콘셉트, 개념 ) - 2](https://openmynotepad.tistory.com/70 )
-- [Concepts ( 콘셉트, 개념 ) - 3](https://openmynotepad.tistory.com/71 )
-- [Concepts ( 콘셉트, 개념 ) - 4](https://openmynotepad.tistory.com/72 )
-- [Concepts 알아보기 (1)](https://blog.naver.com/nsun527/221760493147 )
-- [concept를 이용한 타입 오버플로우 체크](https://blog.naver.com/wkdghcjf1234/222183575154 )
-- [Concepts를 이용한 Join, Concat 구현](https://blog.naver.com/wkdghcjf1234/222181356030 )
-- [concepts를 이용한 String::Format](https://blog.naver.com/wkdghcjf1234/222176161232 )
-- https://cpprefjp.github.io/lang/cpp20/concepts.html
-- (working)C++20コンセプト入門以前  https://qiita.com/yohhoy/items/f3d90c598348817cd29c 
-- (working)【C++20】結局conceptは何が便利なのか  https://qiita.com/negi-drums/items/a527c05050781a5af523 
-- (working)［C++］コンセプトの5景  https://onihusube.hatenablog.com/entry/2019/10/18/194328 
-- (working)C++ にコンセプトがやってくる！   https://secret-garden.hatenablog.com/entry/2019/12/25/100312 
-- (working)コンセプト制約式の包摂関係とオーバーロード解決  https://yohhoy.hatenadiary.jp/entry/20190903/p1  
-- (working)コンセプトは滅びぬ！何度でもよみがえるさ！コンセプトの力こそC++erの夢だからだ！  https://spinor.hatenablog.com/entry/20111215/1323951052 
-- (working)requires式から利用可能な宣言   https://yohhoy.hatenadiary.jp/entry/20200721/p1 
-- (working)C++20コンセプト時代のエラーメッセージとの付き合い方  https://qiita.com/yohhoy/items/9dffbe98497cf12483c6 
-- (working)Slides for Meeting C++ 2019: Concepts in C++20: A Evolution or a Revolution?  https://meetingcpp.com/mcpp/slides/2019/conceptsBerlin.pdf 
-- (working)複合要件とsame_as/convertible_toコンセプト  https://yohhoy.hatenadiary.jp/entry/20200825/p1
-- (working)SFINAEとC++20のコンセプトを比較してみる。  https://kenkyu-note.hatenablog.com/entry/2020/08/07/073349 
-- (working)Intro to C++20's Concepts  https://github.com/hniemeyer/IntroToConcepts 
-- (working)コンセプトと短絡評価  https://yohhoy.hatenadiary.jp/entry/20201119/p1 
-- (working)Concepts で外部ライブラリの template よりも優先されるオーバーロード関数を書く   https://srz-zumix.blogspot.com/2020/03/wipc-concept-template.html 
-    
-    
-   
 ### std::Range
 - (2020.01.20) Visual C++은 Visual Studio 16.8에서 대부분 구현
   
@@ -163,7 +133,37 @@
 - (working)<ranges>のviewを見る16 - reverse_view  https://zenn.dev/onihusube/articles/b91aa582d28ed869ec09 
 - (working)<ranges>のviewを見る17 - elements_view  https://zenn.dev/onihusube/articles/9a13745c24b36b9bd753 
   
+
+
+### Concepts  
+- (2020.01.20) Visual C++은 Visual Studio 16.3에서 일부 구현
   
+- [Concepts ( 콘셉트, 개념 ) - 1](https://openmynotepad.tistory.com/69 )
+- [Concepts ( 콘셉트, 개념 ) - 2](https://openmynotepad.tistory.com/70 )
+- [Concepts ( 콘셉트, 개념 ) - 3](https://openmynotepad.tistory.com/71 )
+- [Concepts ( 콘셉트, 개념 ) - 4](https://openmynotepad.tistory.com/72 )
+- [Concepts 알아보기 (1)](https://blog.naver.com/nsun527/221760493147 )
+- [concept를 이용한 타입 오버플로우 체크](https://blog.naver.com/wkdghcjf1234/222183575154 )
+- [Concepts를 이용한 Join, Concat 구현](https://blog.naver.com/wkdghcjf1234/222181356030 )
+- [concepts를 이용한 String::Format](https://blog.naver.com/wkdghcjf1234/222176161232 )
+- https://cpprefjp.github.io/lang/cpp20/concepts.html
+- (working)C++20コンセプト入門以前  https://qiita.com/yohhoy/items/f3d90c598348817cd29c 
+- (working)【C++20】結局conceptは何が便利なのか  https://qiita.com/negi-drums/items/a527c05050781a5af523 
+- (working)［C++］コンセプトの5景  https://onihusube.hatenablog.com/entry/2019/10/18/194328 
+- (working)C++ にコンセプトがやってくる！   https://secret-garden.hatenablog.com/entry/2019/12/25/100312 
+- (working)コンセプト制約式の包摂関係とオーバーロード解決  https://yohhoy.hatenadiary.jp/entry/20190903/p1  
+- (working)コンセプトは滅びぬ！何度でもよみがえるさ！コンセプトの力こそC++erの夢だからだ！  https://spinor.hatenablog.com/entry/20111215/1323951052 
+- (working)requires式から利用可能な宣言   https://yohhoy.hatenadiary.jp/entry/20200721/p1 
+- (working)C++20コンセプト時代のエラーメッセージとの付き合い方  https://qiita.com/yohhoy/items/9dffbe98497cf12483c6 
+- (working)Slides for Meeting C++ 2019: Concepts in C++20: A Evolution or a Revolution?  https://meetingcpp.com/mcpp/slides/2019/conceptsBerlin.pdf 
+- (working)複合要件とsame_as/convertible_toコンセプト  https://yohhoy.hatenadiary.jp/entry/20200825/p1
+- (working)SFINAEとC++20のコンセプトを比較してみる。  https://kenkyu-note.hatenablog.com/entry/2020/08/07/073349 
+- (working)Intro to C++20's Concepts  https://github.com/hniemeyer/IntroToConcepts 
+- (working)コンセプトと短絡評価  https://yohhoy.hatenadiary.jp/entry/20201119/p1 
+- (working)Concepts で外部ライブラリの template よりも優先されるオーバーロード関数を書く   https://srz-zumix.blogspot.com/2020/03/wipc-concept-template.html 
+     
+     
+     
 ### module
 - [module 사용해보기](https://speedr00t.tistory.com/768 )
 - (working) https://cpprefjp.github.io/lang/cpp20/modules.html  
