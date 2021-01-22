@@ -99,40 +99,9 @@
   
      
 ### std::Range
-- (2020.01.20) Visual C++은 Visual Studio 16.8에서 대부분 구현
+- (2020.01.20) Visual C++은 Visual Studio 16.8에서 대부분 구현   
   
-- (working)範囲ライブラリとして <ranges> が追加される  http://secret-garden.hatenablog.com/entry/2019/12/21/224438 
-- (working)Visual Studio Community 2019 PreviewでC++20 Rangesの主要部分がサポートされた  https://qiita.com/katabamisan/items/407b472596c98fcc5226 
-- (working)範囲ライブラリ (C++20)  https://ja.cppreference.com/w/cpp/ranges 
-- (working)範囲ライブラリとして <ranges> が追加される  http://secret-garden.hatenablog.com/entry/2019/12/21/224438 
-- (working)C++20のRangeライブラリの強力な機能、プロジェクション  https://cpplover.blogspot.com/2019/01/c20range.html  
-- (working)http://becpp.org/blog/wp-content/uploads/2019/10/Arno-Schoedl-From-Iterators-To-Ranges.pdf   
-- (working)C++20 Standard Library Beyond Ranges  https://github.com/CppCon/CppCon2019/blob/master/Presentations/cpp20_standard_library_beyond_ranges/cpp20_standard_library_beyond_ranges__jeff_garland__cppcon_2019.pdf 
-- (working)C++20 Ranges, Projections, std::invoke and if constexpr  https://www.bfilipek.com/2020/10/understanding-invoke.html 
-- (working)C++20: The Ranges Library  http://www.modernescpp.com/index.php/c-20-the-ranges-library 
-- (working)A custom C++20 range view  https://mariusbancila.ro/blog/2020/06/06/a-custom-cpp20-range-view/ 
-- (working)C++ STL イテレーターのRange access（std::begin等）の概要と一覧 https://qiita.com/katabamisan/items/7bc5299f16d1afbfcb13 
-- (working)std::views::splitで文字列分割  https://yohhoy.hatenadiary.jp/entry/20201027/p1 
-- (working)From STL to Ranges   https://github.com/CppCon/CppCon2019/blob/master/Presentations/from_stl_to_ranges/from_stl_to_ranges__jeff_garland__cppcon_2019.pdf 
-- (working)Increased Complexity of C++20 Range Algorithms Declarations - Is It Worth?  https://www.bfilipek.com/2020/10/complex-ranges-algorithms.html 
-- (working)<ranges>のviewを見る1 - empty_view  https://zenn.dev/onihusube/articles/6608a0185832dc51213c 
-- (working)<ranges>のviewを見る2 - single_view  https://zenn.dev/onihusube/articles/5c922fe6856859ef8bf7 
-- (working)<ranges>のviewを見る3 - iota_view  https://zenn.dev/onihusube/articles/87647047e094fe5f3b94 
-- (working)<ranges>のviewを見る4 - istream_view  https://zenn.dev/onihusube/articles/ff891b851802813d73a1 
-- (working)<ranges>のviewを見る5 - ref_view   https://zenn.dev/onihusube/articles/d900f52393b809f5300a 
-- (working)<ranges>のviewを見る6 - filter_view  https://zenn.dev/onihusube/articles/d6ea9550bd0daf46394c 
-- (working)<ranges>のviewを見る7 - transform_view  https://zenn.dev/onihusube/articles/6e053bfeb4fce1db0613 
-- (working)<ranges>のviewを見る8 - take_view  https://zenn.dev/onihusube/articles/cadd871201d9ac0dd322 
-- (working)<ranges>のviewを見る9 - take_while_view  https://zenn.dev/onihusube/articles/4c9df5ac12e042eb62a6 
-- (working)<ranges>のviewを見る10 - drop_view  https://zenn.dev/onihusube/articles/a0b5207df9d587ce0973 
-- (working)<ranges>のviewを見る11 - drop_while_view  https://zenn.dev/onihusube/articles/8fa73ccc945e6002ba5f 
-- (working)<ranges>のviewを見る12 - join_view  https://zenn.dev/onihusube/articles/42b5465e778cee595f76 
-- (working)<ranges>のviewを見る13 - split_view  https://zenn.dev/onihusube/articles/8accfa7e3e30239d7e91 
-- (working)<ranges>のviewを見る14 - counted view  https://zenn.dev/onihusube/articles/5b857ad5bae3190d0d3b 
-- (working)<ranges>のviewを見る15 - common_view  https://zenn.dev/onihusube/articles/ee74272e49fb3953fa3b 
-- (working)<ranges>のviewを見る16 - reverse_view  https://zenn.dev/onihusube/articles/b91aa582d28ed869ec09 
-- (working)<ranges>のviewを見る17 - elements_view  https://zenn.dev/onihusube/articles/9a13745c24b36b9bd753 
-  
+- [Ranges](./ranges.md)
 
 
 ### Concepts  
@@ -144,8 +113,6 @@
 - [Concepts ( 콘셉트, 개념 ) - 4](https://openmynotepad.tistory.com/72 )
 - [Concepts 알아보기 (1)](https://blog.naver.com/nsun527/221760493147 )
 - [concept를 이용한 타입 오버플로우 체크](https://blog.naver.com/wkdghcjf1234/222183575154 )
-- [Concepts를 이용한 Join, Concat 구현](https://blog.naver.com/wkdghcjf1234/222181356030 )
-- [concepts를 이용한 String::Format](https://blog.naver.com/wkdghcjf1234/222176161232 )
 - https://cpprefjp.github.io/lang/cpp20/concepts.html
 - (working)C++20コンセプト入門以前  https://qiita.com/yohhoy/items/f3d90c598348817cd29c 
 - (working)【C++20】結局conceptは何が便利なのか  https://qiita.com/negi-drums/items/a527c05050781a5af523 
