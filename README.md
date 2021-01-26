@@ -114,6 +114,7 @@
 - [Concepts 알아보기 (1)](https://blog.naver.com/nsun527/221760493147 )
 - [concept를 이용한 타입 오버플로우 체크](https://blog.naver.com/wkdghcjf1234/222183575154 )
 - https://cpprefjp.github.io/lang/cpp20/concepts.html
+- C++ テンプレートプログラミングのSFINAEを個人的に理解してみる  https://qiita.com/Ruo_Ando/items/13454dee1a07670911d4   
 - (working)C++20コンセプト入門以前  https://qiita.com/yohhoy/items/f3d90c598348817cd29c 
 - (working)【C++20】結局conceptは何が便利なのか  https://qiita.com/negi-drums/items/a527c05050781a5af523 
 - (working)［C++］コンセプトの5景  https://onihusube.hatenablog.com/entry/2019/10/18/194328 
@@ -144,8 +145,7 @@
 - (working)Modules in VC++ 2019 16.5  https://mariusbancila.ro/blog/2020/05/07/modules-in-vc-2019-16-5/ 
 - (working)C++20: A Simple math Module  http://www.modernescpp.com/index.php/cpp20-a-first-module  
 - (working)Practical C++ Modules  https://github.com/CppCon/CppCon2019/blob/master/Presentations/practical_cpp_modules/practical_cpp_modules__boris_kolpackov__cppcon_2019.pdf 
-- (working)モジュールへの移行を考える 1 - 単一ヘッダファイル+単一ソースファイル  https://zenn.dev/onihusube/articles/299ed7a3bc6062068fdd 
-- (working)モジュールへの移行を考える 2 - 実装の隠蔽について https://zenn.dev/onihusube/articles/7f1a6253b0683458b9d0 
+- (working)モジュールへの移行を考える 3 - 複数ヘッダファイル+単一ソースファイル  https://zenn.dev/onihusube/articles/98a0fce9827fa87a88d3    
 - (working)C＋＋20のモジュールとincludeの違いについて詳しく調べてみた  https://logicalbeat.jp/blog/6223/ 
   
   
