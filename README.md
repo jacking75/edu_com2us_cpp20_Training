@@ -3,7 +3,8 @@
     - Visual C++ 19.28은 Visual Studio 16.9에 해당한다
     - [Visual C++ 버전 별 Visual Studio 버전 테이블](https://docs.microsoft.com/ko-kr/cpp/error-messages/compiler-warnings/compiler-warnings-by-compiler-version?view=msvc-160 )
     - [MS STL Changelog](https://github.com/microsoft/STL/wiki/Changelog )
-  
+- [modern-cpp-features](https://github.com/AnthonyCalandra/modern-cpp-features )
+   
   
 ## 학습 자료
 - 웹에서 공개된 자료를 참고하여 정리했다.
