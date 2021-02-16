@@ -114,38 +114,27 @@
 - [Concepts ( 콘셉트, 개념 ) - 4](https://openmynotepad.tistory.com/72 )
 - [Concepts 알아보기 (1)](https://blog.naver.com/nsun527/221760493147 )
 - [concept를 이용한 타입 오버플로우 체크](https://blog.naver.com/wkdghcjf1234/222183575154 )
-- https://cpprefjp.github.io/lang/cpp20/concepts.html
-- C++ テンプレートプログラミングのSFINAEを個人的に理解してみる  https://qiita.com/Ruo_Ando/items/13454dee1a07670911d4   
-- (working)C++20コンセプト入門以前  https://qiita.com/yohhoy/items/f3d90c598348817cd29c 
-- (working)【C++20】結局conceptは何が便利なのか  https://qiita.com/negi-drums/items/a527c05050781a5af523 
-- (working)［C++］コンセプトの5景  https://onihusube.hatenablog.com/entry/2019/10/18/194328 
-- (working)C++ にコンセプトがやってくる！   https://secret-garden.hatenablog.com/entry/2019/12/25/100312 
-- (working)コンセプト制約式の包摂関係とオーバーロード解決  https://yohhoy.hatenadiary.jp/entry/20190903/p1  
-- (working)コンセプトは滅びぬ！何度でもよみがえるさ！コンセプトの力こそC++erの夢だからだ！  https://spinor.hatenablog.com/entry/20111215/1323951052 
-- (working)requires式から利用可能な宣言   https://yohhoy.hatenadiary.jp/entry/20200721/p1 
-- (working)C++20コンセプト時代のエラーメッセージとの付き合い方  https://qiita.com/yohhoy/items/9dffbe98497cf12483c6 
-- (working)Slides for Meeting C++ 2019: Concepts in C++20: A Evolution or a Revolution?  https://meetingcpp.com/mcpp/slides/2019/conceptsBerlin.pdf 
-- (working)複合要件とsame_as/convertible_toコンセプト  https://yohhoy.hatenadiary.jp/entry/20200825/p1
-- (working)SFINAEとC++20のコンセプトを比較してみる。  https://kenkyu-note.hatenablog.com/entry/2020/08/07/073349 
-- (working)Intro to C++20's Concepts  https://github.com/hniemeyer/IntroToConcepts 
-- (working)コンセプトと短絡評価  https://yohhoy.hatenadiary.jp/entry/20201119/p1 
-- (working)Concepts で外部ライブラリの template よりも優先されるオーバーロード関数を書く   https://srz-zumix.blogspot.com/2020/03/wipc-concept-template.html 
-     
-     
-     
+- [(일어) concept 개념과 사용법](https://cpprefjp.github.io/lang/cpp20/concepts.html )
+- (일어)C++20 concept 이전 입문]  https://qiita.com/yohhoy/items/f3d90c598348817cd29c 
+- Meeting C++ 2019: Concepts in C++20: A Evolution or a Revolution? [pdf](https://meetingcpp.com/mcpp/slides/2019/conceptsBerlin.pdf )
+- [Intro to C++20's Concepts](https://github.com/hniemeyer/IntroToConcepts )
+- [C++템플릿 프로그래밍 SFINAE을 이해하기](https://docs.google.com/document/d/12D1cAFHhgXipn20Gg2WVlZiZN8Rl_2qELiwESABXgVM/edit?usp=sharing )
+  
+      
+      
 ### module
-- [module 사용해보기](https://speedr00t.tistory.com/768 )
-- (working) https://cpprefjp.github.io/lang/cpp20/modules.html  
 - (working)C++ にモジュールがやってくる！   http://secret-garden.hatenablog.com/entry/2019/12/23/212339 
-- (working)A Tour of C++ Modules in Visual Studio  https://devblogs.microsoft.com/cppblog/a-tour-of-cpp-modules-in-visual-studio/ 
-- (working)Standard C++20 Modules support with MSVC in Visual Studio 2019 version 16.8 https://devblogs.microsoft.com/cppblog/standard-c20-modules-support-with-msvc-in-visual-studio-2019-version-16-8/ 
-- (working)Visual C++ 2015 Update 1でC++にmoduleが試験的に実装された  http://nekko1119.hatenablog.com/entry/2015/12/02/070752 
+- [module 사용해보기](https://speedr00t.tistory.com/768 )
+- [A Tour of C++ Modules in Visual Studio](https://devblogs.microsoft.com/cppblog/a-tour-of-cpp-modules-in-visual-studio/ )
+- [Standard C++20 Modules support with MSVC in Visual Studio 2019 version 16.8](https://devblogs.microsoft.com/cppblog/standard-c20-modules-support-with-msvc-in-visual-studio-2019-version-16-8/ )
+- Practical C++ Modules [pdf](https://github.com/CppCon/CppCon2019/blob/master/Presentations/practical_cpp_modules/practical_cpp_modules__boris_kolpackov__cppcon_2019.pdf )
+- [Modules in VC++ 2019 16.5](https://mariusbancila.ro/blog/2020/05/07/modules-in-vc-2019-16-5/ )
+- [C++20: A Simple math Module](http://www.modernescpp.com/index.php/cpp20-a-first-module )  
+  
+- (working) https://cpprefjp.github.io/lang/cpp20/modules.html  
 - (working)モジュール理論 基礎編  https://onihusube.hatenablog.com/entry/2019/07/07/025446  
 - (working)C++20 モジュールの概要 / Introduction to C++ modules (part 1) https://www.slideshare.net/TetsuroMatsumura/c20-152189285 
 - (working)続・モジュール / Introduction to C++ modules (part 2) https://www.slideshare.net/TetsuroMatsumura/introduction-to-c-modules-part-2-225829715   
-- (working)Modules in VC++ 2019 16.5  https://mariusbancila.ro/blog/2020/05/07/modules-in-vc-2019-16-5/ 
-- (working)C++20: A Simple math Module  http://www.modernescpp.com/index.php/cpp20-a-first-module  
-- (working)Practical C++ Modules  https://github.com/CppCon/CppCon2019/blob/master/Presentations/practical_cpp_modules/practical_cpp_modules__boris_kolpackov__cppcon_2019.pdf 
 - (working)モジュールへの移行を考える 3 - 複数ヘッダファイル+単一ソースファイル  https://zenn.dev/onihusube/articles/98a0fce9827fa87a88d3    
 - (working)C＋＋20のモジュールとincludeの違いについて詳しく調べてみた  https://logicalbeat.jp/blog/6223/ 
   
