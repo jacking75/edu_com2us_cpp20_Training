@@ -17,7 +17,7 @@ namespace NaveNetLib {
 	class NFUpdateManager
 	{
 	public:
-		NFUpdateManager(void);
+		NFUpdateManager(void) = default;
 		~NFUpdateManager(void) = default;
 
 	public:
@@ -25,15 +25,12 @@ namespace NaveNetLib {
 		void Update();
 				
 		
-	private:
-		enum {
-			// 최대 1024 개의 패킷을 저장할 수 있다.
-			MaxQueCount = 1024,
-		};
+	private:		
+		static const int MaxQueCount = 1024; // 최대 1024 개의 패킷을 저장할 수 있다.
 
 		// 원형큐 대용.
-		INT						m_Head;
-		INT						m_Tail;
+		INT						m_Head = 0;
+		INT						m_Tail = 0;
 		NFConnection*			m_Conn[MaxQueCount];
 		NFPacket				m_Packet[MaxQueCount];
 

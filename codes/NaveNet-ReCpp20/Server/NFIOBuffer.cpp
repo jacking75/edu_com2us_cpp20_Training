@@ -7,10 +7,7 @@ namespace NaveNetLib {
 	// IOBuffer의 기본크기 패킷 1024개만큼 처리가능
 	const int IOBUF_DEF_SIZE = DEF_MAXPACKETSIZE*128;
 
-	NFIOBuffer::NFIOBuffer() : m_iHead(0), m_iTail(0), m_iBufSize(0), m_cBuf(0), m_iBuffered(0)
-	{
-	}
-
+	
 	NFIOBuffer::~NFIOBuffer()
 	{
 		DeleteIOBuf();
@@ -165,7 +162,7 @@ namespace NaveNetLib {
 	}
 
 
-	NFPacketIOBuffer::NFPacketIOBuffer() : m_iLockHead(0)
+	NFPacketIOBuffer::NFPacketIOBuffer()
 	{
 		// 초기화.
 		NFIOBuffer::NFIOBuffer();
@@ -199,7 +196,7 @@ namespace NaveNetLib {
 			return false;
 		}
 
-		if(HeaderSize != GetData((char*)&header, HeaderSize))
+		if(auto size = GetData((char*)&header, HeaderSize); size != HeaderSize)
 		{
 			// 헤더를 원래대로 초기화 한다.
 	//		throw "NFPacketIOBuffer::GetPacket : Packet Header Size != P_SIZE";
@@ -208,18 +205,15 @@ namespace NaveNetLib {
 
 		int PacketSize = header.Size-HeaderSize;
 		// 헤더는 제대로 들어갔는데 버퍼가 제대로 들어갔는지 확인한다.
-		if(GetBufferUsed() < PacketSize)
+		if(auto size = GetBufferUsed(); size < PacketSize)
 		{
 			// 헤더를 원래대로 초기화 한다.
 			// 에러가 아니라 데이타가 없는거다.
 	//		throw "NFPacketIOBuffer::GetPacket : IOBuffer Used Memory < PacketLen";
 			return false;
 		}
-
 		
-		int GetSize = CheckData(PacketSize);
-		
-		if(GetSize != PacketSize)
+		if(auto size = CheckData(PacketSize); size != PacketSize)
 		{
 			// 헤더를 원래대로 초기화 한다.
 	//		throw "NFPacketIOBuffer::GetPacket : Packet Data Read Faild, PacketSize != GetSize";
@@ -231,12 +225,11 @@ namespace NaveNetLib {
 
 	int NFPacketIOBuffer::GetPacket(NFPacket* Packet)
 	{
-		int OldHead = GetHead();
-
+		int oldHead = GetHead();
 		int HeaderSize = HEADERSIZE;
 
 		// Header
-		if(GetBufferUsed() < HeaderSize)
+		if(auto size = GetBufferUsed(); size < HeaderSize)
 		{
 			// 에러가 아니라 데이타가 없는거다.
 	//		throw "NFPacketIOBuffer::GetPacket : IOBuffer Used Memory < P_SIZE";
@@ -246,7 +239,7 @@ namespace NaveNetLib {
 		if(HeaderSize != GetData((char*)&Packet->m_Header, HeaderSize))
 		{
 			// 헤더를 원래대로 초기화 한다.
-			SetHead(OldHead);
+			SetHead(oldHead);
 	//		throw "NFPacketIOBuffer::GetPacket : Packet Header Size != P_SIZE";
 			return -2;
 		}
@@ -256,18 +249,17 @@ namespace NaveNetLib {
 		if(GetBufferUsed() < PacketSize)
 		{
 			// 헤더를 원래대로 초기화 한다.
-			SetHead(OldHead);
+			SetHead(oldHead);
 			// 에러가 아니라 데이타가 없는거다.
 	//		throw "NFPacketIOBuffer::GetPacket : IOBuffer Used Memory < PacketLen";
 			return -3;
 		}
 
 		// 아직 데이타가 제대로 처리안됐다.
-		int GetSize = GetData(Packet->m_Packet, PacketSize);
-		if(GetSize != PacketSize)
+		if(auto size = GetData(Packet->m_Packet, PacketSize); size != PacketSize)
 		{
 			// 헤더를 원래대로 초기화 한다.
-			SetHead(OldHead);
+			SetHead(oldHead);
 	//		throw "NFPacketIOBuffer::GetPacket : Packet Data Read Faild, PacketSize != GetSize";
 			return -4;
 		}

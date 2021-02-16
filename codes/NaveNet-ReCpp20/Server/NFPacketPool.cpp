@@ -121,7 +121,7 @@ namespace NaveNetLib {
 	// [3]RETURN :	true - 정상처리 false - 실패 					//
 	// [4]DATE : 2000년 9월 4일										//
 	//////////////////////////////////////////////////////////////////
-	bool NFPacketPool::LogWrite( char *lpszFmt, ... )
+	bool NFPacketPool::LogWrite( const char *lpszFmt, ... )
 	{
 		if (NULL == m_hLogFile) {
 			return false;
@@ -130,7 +130,7 @@ namespace NaveNetLib {
 		va_list		argptr;
 		CHAR		szOutStr[1024];
 		va_start(argptr, lpszFmt);
-		vsprintf(szOutStr, lpszFmt, argptr);
+		vsprintf_s(szOutStr, lpszFmt, argptr);
 		va_end(argptr);
 		
 		INT nBytesWritten = fprintf( m_hLogFile, "%s\r\n", szOutStr );// LOG 내용 

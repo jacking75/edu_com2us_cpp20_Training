@@ -39,7 +39,7 @@ namespace NaveNetLib {
 		 * @brief	로그파일의 이름을 결정합니다.
 		 * @param strLogTitle 로그의 이름
 		 */
-		void SetLogTitle(wchar_t* strLogTitle)
+		void SetLogTitle(const wchar_t* strLogTitle)
 		{
 			wcscpy_s(m_strLogTitle, strLogTitle);
 		}

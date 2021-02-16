@@ -4,13 +4,9 @@
 namespace NaveNetLib {
 
 //	INT				iMaxProcPacket = 0;
-//	INT				iProcPacket = 0;								// 이 객체가 클라이언트와 연결 검사
-//	DWORD			uProcTickCnt = 0;								// 수신 Tick Count 
-
-	NFUpdateManager::NFUpdateManager(void) : m_Head(0), m_Tail(0)
-	{
-	}
-
+//	INT				iProcPacket = 0;		// 이 객체가 클라이언트와 연결 검사
+//	DWORD			uProcTickCnt = 0;		// 수신 Tick Count 
+		
 	void NFUpdateManager::Update()
 	{
 		std::lock_guard<std::mutex> Sync(m_Lock);
@@ -36,40 +32,43 @@ namespace NaveNetLib {
 		{
 			for(int i = m_Head; i < MaxQueCount; ++i)
 			{
-				if (m_Conn[i] == NULL) {
+				if (m_Conn[i] == nullptr) {
 					continue;
 				}
 
 				m_Conn[i]->UpdatePacket(m_Packet[i]);
-				m_Conn[i] = NULL;
+				m_Conn[i] = nullptr;
 				iCount++;
 			}
 
 			for(int i = 0; i < Tail; ++i)
 			{
-				if (m_Conn[i] == NULL) {
+				if (m_Conn[i] == nullptr) 
+				{
 					continue;
 				}
 
 				m_Conn[i]->UpdatePacket(m_Packet[i]);
-				m_Conn[i] = NULL;
+				m_Conn[i] = nullptr;
 				iCount++;
 			}
 		}
-		else // Tail이 뒤에있다.
+		else // Tail이 뒤에 있다.
 		{
 			for(int i = m_Head; i < Tail; ++i)
 			{
-				if (m_Conn[i] == NULL) {
+				if (m_Conn[i] == nullptr)
+				{
 					continue;
 				}
 
 				m_Conn[i]->UpdatePacket(m_Packet[i]);
-				m_Conn[i] = NULL;
+				m_Conn[i] = nullptr;
 				iCount++;
 			}
 
 		}
+
 //		InterlockedExchange((LONG*)&iProcPacket,iProcPacket+iCount);
 
 		m_Head = Tail;
@@ -79,29 +78,36 @@ namespace NaveNetLib {
 	{
 		std::lock_guard<std::mutex> Sync(m_Lock);
 
-		if (!pUser) {
+		if (!pUser) 
+		{
 			return;
 		}
 
-		auto Tail = m_Tail;
-		m_Conn[Tail] = pUser;
+		auto tail = m_Tail;
+		m_Conn[tail] = pUser;
 		
-		if (pPacket) {
-			memcpy(&m_Packet[Tail], pPacket, sizeof(NFPacket));
+		if (pPacket) 
+		{
+			memcpy(&m_Packet[tail], pPacket, sizeof(NFPacket));
 		}
-		else {
-			m_Packet[Tail].Init();
+		else 
+		{
+			m_Packet[tail].Init();
 		}
 
-		if (Tail + 1 >= MaxQueCount) {
+		if ((tail + 1) >= MaxQueCount) 
+		{
 			m_Tail = 0;
 		}
-		else {
-			m_Tail = Tail + 1;
+		else 
+		{
+			m_Tail = tail + 1;
 		}
 
-//		if(m_Tail == m_Head)
-//			NAVE_ERROR(("UpdateManager Overflow. (H:%d, T:%d)", m_Head, m_Tail));
+		/*if (m_Tail == m_Head)
+		{
+			NAVE_ERROR(("UpdateManager Overflow. (H:%d, T:%d)", m_Head, m_Tail));
+		}*/
 	}
 
 }

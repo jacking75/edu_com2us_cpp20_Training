@@ -40,7 +40,7 @@ namespace NaveNetLib {
 	{
 	public:
 		/// NFIOBuffer 생성자
-		NFIOBuffer();
+		NFIOBuffer() = default;
 		/// NFIOBuffer 소멸자
 		virtual ~NFIOBuffer();
 
@@ -131,16 +131,16 @@ namespace NaveNetLib {
 
 	private:
 		/// 읽을 버퍼의 시작위치.
-		int		m_iHead;
+		int		m_iHead = 0;
 		/// 사용된 버퍼의 끝.
-		int		m_iTail;
+		int		m_iTail = 0;
 		/// 생성한 버퍼의 사이즈
-		int		m_iBufSize;
+		int		m_iBufSize = 0;
 		/// 생성한 버퍼의 포인터.
-		char*	m_cBuf;
+		char*	m_cBuf = 0;
 
 		/// 사용된 버퍼의 사이즈 이값이 음수면 Over Flow..
-		int		m_iBuffered;
+		int		m_iBuffered = 0;
 	};
 
 	/** 
@@ -175,7 +175,7 @@ namespace NaveNetLib {
 
 	private:
 		/// Lock 과 UnLock에서 사용할 변수 
-		int		m_iLockHead;
+		int		m_iLockHead = 0;
 	};
 
 

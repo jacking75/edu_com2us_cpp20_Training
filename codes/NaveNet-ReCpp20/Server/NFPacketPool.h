@@ -44,7 +44,7 @@ namespace NaveNetLib {
 
 	private:
 		bool				LogOpen(char *lpszFileName);			// 로그 파일 열기 
-		bool				LogWrite(char *lpszFmt, ...);			// 로그 파일 만들기 
+		bool				LogWrite(const char *lpszFmt, ...);			// 로그 파일 만들기 
 		void				LogClose();								// 로그 파일 닫기 
 
 	//---------------------- Member Variables ----------------------//

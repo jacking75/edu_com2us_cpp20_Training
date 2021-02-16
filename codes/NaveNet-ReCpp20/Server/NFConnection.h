@@ -11,12 +11,11 @@
 
 #include "NaveServer.h"
 #include "NFMemPool.h"
-//#include "NFPacketPool.h"
 #include "NFIOBuffer.h"
 
 
-namespace NaveNetLib {
-
+namespace NaveNetLib 
+{
 	class NFPacketPool;
 	class NFUpdateManager;
 
@@ -46,42 +45,42 @@ namespace NaveNetLib {
 		 * @param nMaxBuf		최대 버퍼크기
 		 * @return 성공여부
 		 */
-		virtual bool		Create( DWORD			dwIndex,
-									HANDLE			hIOCP,
-									SOCKET			listener,
-			NFPacketPool*	pPacketPool,
-									INT				nMaxBuf);
+		virtual bool Create( DWORD			dwIndex,
+							HANDLE			hIOCP,
+							SOCKET			listener,
+							NFPacketPool*	pPacketPool,
+							INT				nMaxBuf);
 
 		/**
 		 * @brief	패킷을 업데이트처리 합니다. 
 		 * @param Packet 업데이트 할 패킷정보
 		 */
-		virtual void		UpdatePacket(NFPacket& Packet);
+		virtual void UpdatePacket(NFPacket& Packet);
 
 		/**
 		 * @brief	연결 강제 종료 
 		 * @param bForce true면 소켓에 남은 데이터 정리
 		 */
-		void				Disconnect( bool bForce = false );		
+		void Disconnect( bool bForce = false );		
 
 		/**
 		 * @brief	내부 변수등을 정리합니다.
 		 */
-		virtual void		Clear() { return; };
+		virtual void Clear() { return; };
 
 		/**
 		 * @brief	객체의 클라이언트 연결 해제 및 초기화
 		 * @param bForce true면 소켓에 남은 데이터 정리
 		 * @return  성공여부
 		 */
-		virtual bool		Close_Open( bool bForce = false );
+		virtual bool Close_Open( bool bForce = false );
 
 		/**
 		 * @brief	IOCP 처리 핸들링
 		 * @param lpOverlapPlus	처리할 패킷
 		 * @return 
 		 */
-		virtual bool		DoIo( LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager);
+		virtual bool DoIo( LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager);
 
 		/**
 		 * @brief	패킷 전송
@@ -89,105 +88,108 @@ namespace NaveNetLib {
 		 * @param Len 보낼 패킷 크기
 		 * @return  성공여부
 		 */
-		virtual bool		SendPost( CHAR* pPackte, INT Len );	
+		virtual bool SendPost( CHAR* pPackte, INT Len );	
 
 		/**
 		 * @brief	패킷 전송
 		 * @param Packet 보낼 패킷 구조체
 		 * @return  성공여부
 		 */
-		virtual bool		SendPost( NFPacket&	Packet);
+		virtual bool SendPost( NFPacket&	Packet);
 
 		/**
 		 * @brief	연결자의 IP얻기 
 		 * @param iIP 정수형 4개 배열
 		 * @return 
 		 */
-		bool				GetClientIP( INT* iIP );					 
+		bool GetClientIP( INT* iIP );					 
+
 		/**
 		 * @brief	연결자의 IP얻기 
 		 * @param szIP 문자형
 		 * @return 
-		 */
-		bool				GetClientIP( CHAR* szIP );				
+		 */		
+		bool GetClientIP( CHAR* szIP );				
+
 		/**
 		 * @brief	연결자의 IP얻기 
 		 * @param szIP 유니코드 문자형
 		 * @return 
 		 */
-		bool				GetClientIP( wchar_t* szIP );				
+		bool GetClientIP( wchar_t* szIP );				
+
 		/**
 		 * @brief	연결자의 IP얻기 
 		 * @param addr sockaddr_in 형식
 		 * @return 
 		 */
-		bool				GetClientIP( sockaddr_in& addr );			
+		bool GetClientIP( sockaddr_in& addr );			
 
 		/**
 		 * @brief	연결개체의 고유 인덱스를 설정합니다.
 		 * @param iIndex 연결개체의 고유 인덱스
 		 */
-		inline void			SetIndex(INT iIndex) { m_dwIndex = iIndex; };
+		inline void SetIndex(INT iIndex) { m_dwIndex = iIndex; };
 
 		/**
 		 * @brief	연결개체의 고유 인덱스 얻기
 		 * @return  인덱스값
 		 */
-		inline DWORD		GetIndex() { return m_dwIndex; }
+		inline DWORD GetIndex() { return m_dwIndex; }
 
 		/**
 		 * @brief	수신 Tick 얻기
 		 * @return  수신 Tick 카운트
 		 */
-		LONG				GetRecvTickCnt();
+		LONG GetRecvTickCnt();
 
 		/**
 		 * @brief	연결 객체의 활성화 상태 얻기
 		 * @return  활성화 상태
 		 */
-		bool				IsConnect();
+		bool IsConnect();
 
 		/**
 		 * @brief	연결 객체의 상태를 설정합니다.
 		 * @param eState	연결 객체의 상태 정보 
 		 */
-		void				SetConnectFlag(CONNECT_EVENT eState, NFUpdateManager* pUpdateManager);
+		void SetConnectFlag(CONNECT_EVENT eState, NFUpdateManager* pUpdateManager);
 
 		/**
 		 * @brief	전달된 Overlapped객체를 이용해 연결 객체를 종료시킨후 초기화 시킵니다.
 		 * @param lpOverlapPlus Overlapped 객체
 		 * @param bForce   true면 소켓에 남은 데이터 정리
 		 */
-		void				SetClose_Open(LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager, bool bForce=false );
+		void SetClose_Open(LPOVERLAPPEDPLUS lpOverlapPlus, 
+							NFUpdateManager* pUpdateManager, 
+							bool bForce=false );
 
-		//------------------------ 멤 버 함 수 -------------------------//
 	protected:
-
 		/**
 		 * @brief	객체 초기화, 리슨 소켓 결합					
 		 * @return  성공여부
 		 */
-		virtual bool		Open();
+		virtual bool Open();
 
 		/**
 		 * @brief	Socket과 IOCP 바인딩 작업
 		 * @param lpOverlapPlus 바인딩 시킬 Overlapped 구조체
 		 * @return 
 		 */
-		bool				BindIOCP( LPOVERLAPPEDPLUS lpOverlapPlus );
+		bool BindIOCP( LPOVERLAPPEDPLUS lpOverlapPlus );
 
 		/**
 		 * @brief	Accept패킷 할당
 		 * @return  할당된 Overlapped 구조체 
 		 */
-		LPOVERLAPPEDPLUS	PrepareAcptPacket();
+		LPOVERLAPPEDPLUS PrepareAcptPacket();
 
 		/**
 		 * @brief	IOCP를 이용한 Recv Overlapped 셋팅
 		 * @param buflen 받을 크기
 		 * @return  할당된 Overlapped 구조체 
 		 */
-		LPOVERLAPPEDPLUS	PrepareRecvPacket(UINT buflen);
+		LPOVERLAPPEDPLUS PrepareRecvPacket(UINT buflen);
 
 		/**
 		 * @brief	IOCP를 이용한 Send Overlapped 셋팅
@@ -195,50 +197,50 @@ namespace NaveNetLib {
 		 * @param srclen   보낼 크기
 		 * @return  할당된 Overlapped 구조체 
 		 */
-		LPOVERLAPPEDPLUS	PrepareSendPacket(CHAR *psrcbuf, UINT srclen);
+		LPOVERLAPPEDPLUS PrepareSendPacket(CHAR *psrcbuf, UINT srclen);
 
 		/**
 		 * @brief	Accept 패킷 해제  							
 		 * @param lpOverlapPlus 해제할 Overlapped구조체
 		 * @return  성공여부
 		 */
-		bool				ReleaseAcptPacket(LPOVERLAPPEDPLUS lpOverlapPlus);
+		bool ReleaseAcptPacket(LPOVERLAPPEDPLUS lpOverlapPlus);
 
 		/**
 		 * @brief	Receive 패킷 해제  							
 		 * @param lpOverlapPlus 해제할 Overlapped구조체
 		 * @return  성공여부
 		 */
-		bool				ReleaseRecvPacket(LPOVERLAPPEDPLUS lpOverlapPlus);
+		bool ReleaseRecvPacket(LPOVERLAPPEDPLUS lpOverlapPlus);
 
 		/**
 		 * @brief	Send 패킷 해제
 		 * @param lpOverlapPlus 해제할 Overlapped구조체
 		 * @return  성공여부
 		 */
-		bool				ReleaseSendPacket(LPOVERLAPPEDPLUS lpOverlapPlus);
+		bool ReleaseSendPacket(LPOVERLAPPEDPLUS lpOverlapPlus);
 
 		/**
 		 * @brief	실제 Receive 처리
 		 * @param buflen  보낼 버퍼 사이즈
 		 * @return  성공여부
 		 */
-		bool				RecvPost(UINT buflen=0);
+		bool RecvPost(UINT buflen=0);
 
 		/**
 		 * @brief	로그에 메시지를 출력합니다.
 		 * @param MsgIndex 메시지 아이디
 		 */
-		virtual void		ShowMessage(INT MsgIndex);
+		virtual void ShowMessage(INT MsgIndex);
 
 		/**
 		 * @brief	 연결자에서 Connect 이벤트 발생
 		 * @param bConnect Connect 성공여부
 		 */
-		virtual void		OnConnect(bool bConnect) { };
+		virtual void OnConnect(bool bConnect) { };
 
 		/// Disconnect 이벤트 발생
-		virtual	void		OnDisconnect() { };
+		virtual	void OnDisconnect() { };
 
 		// 내부 처리 전송 함수 
 		/**
@@ -246,17 +248,19 @@ namespace NaveNetLib {
 		 * @param lpOverlapPlus Overlapped 구조체
 		 * @return  Recv 처리 성공 여부 
 		 */
-		virtual bool		DispatchPacket( LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager);
+		virtual bool DispatchPacket( LPOVERLAPPEDPLUS lpOverlapPlus, 
+									NFUpdateManager* pUpdateManager);
 
 		/**
 		 * @brief	실제 패킷을 처리하는 부분이다
 		 * @param Packet 처리할 패킷 구조체
 		 */
-		virtual void		DispatchPacket( NFPacket& Packet ) 
+		virtual void DispatchPacket( NFPacket& Packet ) 
 		{
 			// 상속받아서 패킷을 처리할때는 아래와 같이 세션 변수를 등록해서 사용한다.
 			//Nave::Sync::CSSync Live(&m_Sync);
 		};
+
 
 	protected:
 		/// 최대 버퍼 사이즈 
@@ -266,24 +270,23 @@ namespace NaveNetLib {
 		INT					m_nMaxPacketSize = 0;						
 
 		/// 클라이언트 연결 소켓 
-		SOCKET				m_Socket = NULL;								
+		SOCKET				m_Socket = NULL;
 		
 		/// Listener 소켓 
 		SOCKET				m_sckListener = NULL;							
 
 		/// 서버 정보를 가지고 있는 객체 
-		sockaddr_in			m_Local;	
+		sockaddr_in			m_Local = {};
 
 		/// 클라이언트 정보를 가지고 있는 객체 
-		sockaddr_in			m_Peer;									
+		sockaddr_in			m_Peer = {};
 		
 		/// 이 클라이언트 연결 객체의 번호 
-		INT					m_dwIndex;								
+		INT					m_dwIndex = 0;								
 
 		/// 보낸 바이트 검사 변수 
-		INT					m_nBytesSent;							
+		INT					m_nBytesSent = 0;							
 
-		/// IOCP 핸들 	
 		HANDLE				m_hIOCP = NULL;								
 
 		//이 클래스는 IOCP에서 패킷을 주고 받을때 Socket에 직접 연결되는 버퍼를 관리한다.

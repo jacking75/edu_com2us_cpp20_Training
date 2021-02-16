@@ -93,7 +93,7 @@ namespace NaveNetLib {
 		ZeroMemory(tBuf, sizeof(tBuf));
 		INT DestIndex = index;
 
-		CHAR* pLine = "\n";
+		auto pLine = "\n";
 		auto pLen = (INT)strlen(pLine);
 
 		for (INT i = 0; i < maxsBuf; i++)

@@ -4,7 +4,8 @@
 //#include <GZip/zlib.h>
 //#pragma comment(lib,"zlib.lib")
 
-namespace NaveNetLib {
+namespace NaveNetLib 
+{
 
 	NFPacket::NFPacket()
 	{
@@ -76,11 +77,13 @@ namespace NaveNetLib {
 	{ 
 		UINT CheckSum = ((m_Header.Command+m_Header.Size+m_Packet[0]+m_Packet[1])^0xA6F69E23)^0x62F2EA02;
 		
-		if (isEncrypt) {
+		if (isEncrypt) 
+		{
 			CheckSum = CheckSum & 0x0FFFFFFF;
 		}
 
-		if (m_Header.CheckSum == CheckSum) {
+		if (m_Header.CheckSum == CheckSum) 
+		{
 			return true;
 		}
 

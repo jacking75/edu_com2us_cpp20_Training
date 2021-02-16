@@ -14,7 +14,8 @@
 
 
 
-namespace NaveNetLib { 
+namespace NaveNetLib 
+{ 
 
 	using USHORT = unsigned short;
 	using UINT = unsigned int;
@@ -117,7 +118,6 @@ namespace NaveNetLib {
 		 */
 		inline void SetSize(USHORT shDataSize)
 		{
-			// Size = Header + DataSize;
 			m_Header.Size = HEADERSIZE + shDataSize;
 		}	
 

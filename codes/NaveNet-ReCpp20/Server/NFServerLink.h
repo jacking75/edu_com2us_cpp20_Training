@@ -7,7 +7,8 @@
  */
 #pragma once
 
-namespace NaveNetLib {
+namespace NaveNetLib 
+{
 
 	// NFServerLink는 Server가 NFServerCtrl로 Connection을 하기위해 제작된 구조체이다
 	// NFServerLink을 선언후 Create로 Server에 Connection하게 한다.

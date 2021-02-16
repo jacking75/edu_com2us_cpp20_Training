@@ -15,19 +15,10 @@ namespace NaveNetLib {
 
 	NFConnection::~NFConnection()
 	{
-		m_nMaxBuf = m_nMaxPacketSize = 0;
-		m_sckListener	= NULL;
-
 		Disconnect();
 
 		m_eConnectFlag	= CONNECT_NONE;
-		m_bIsConnect	= false;
-		m_bForce		= false;
-
-		m_hIOCP			= NULL;
-		m_pPacketPool	= nullptr;
-		m_uRecvTickCnt	= 0;
-
+				
 		m_RecvIO.DeleteIOBuf();
 	}
 
@@ -66,16 +57,16 @@ namespace NaveNetLib {
 
 		m_RecvIO.InitIOBuf();	// 패킷버퍼를 초기화한다.
 		
- 		// create socket for send/recv
-		m_Socket = WSASocket( AF_INET, SOCK_STREAM, IPPROTO_IP,NULL,0,WSA_FLAG_OVERLAPPED );
+ 		m_Socket = WSASocket( AF_INET, SOCK_STREAM, IPPROTO_IP,NULL,0,WSA_FLAG_OVERLAPPED );
 
 		// 현재 소켓이 제대로 생성 되었는지 검사 
-		if (m_Socket == NULL) {
+		if (m_Socket == NULL) 
+		{
 			return false;
 		}
 
 		// Accpet할 오버랩구조체와 패킷버퍼를 준비한다.
-		LPOVERLAPPEDPLUS newolp = PrepareAcptPacket();
+		auto newolp = PrepareAcptPacket();
 
 		if(newolp == nullptr) 
 		{
@@ -87,15 +78,15 @@ namespace NaveNetLib {
 		/////////////////////////////////////////////////////////////////////
 		// Socket과 Listener와 연결
 		// Overlapped에 들어가는 변수가 나중에 IOCP 이벤트 발생 처리에 쓰인다
-		static char acceptDummyBuf[64] = {0, };
-		bool bRet = AcceptEx(newolp->sckListen,						// Listen Socket
-							newolp->sckClient,						// Socket
-			acceptDummyBuf, //newolp->wbuf.buf,		// 버퍼 포인터 
-							0,	//m_nMaxBuf							// 버퍼 사이즈. 0 이 아니면 데이터를 받아야지 접속 처리한다.  
-							sizeof(sockaddr_in) + 16,				// 소켓 정보 - IP, Address, Name.. etc
-							sizeof(sockaddr_in) + 16,				// 소켓 정보 - IP, Address, Name.. etc
-							&newolp->dwBytes,						// 처리 바이트 크기 
-							&newolp->overlapped);					// *중요*
+		char acceptDummyBuf[64] = {0, };
+		bool bRet = AcceptEx(newolp->sckListen,		// Listen Socket
+							newolp->sckClient,		// Socket
+							acceptDummyBuf, //newolp->wbuf.buf,		// 버퍼 포인터 
+							0,// 버퍼 사이즈. 0 이 아니면 데이터를 받아야지 접속 처리한다. 
+							sizeof(sockaddr_in) + 16,// 소켓 정보 - IP, Address, Name.. etc
+							sizeof(sockaddr_in) + 16,// 소켓 정보 - IP, Address, Name.. etc
+							&newolp->dwBytes,	// 처리 바이트 크기 
+							&newolp->overlapped);	// *중요*
 
 		// 에러 처리 
 		if(!bRet && WSAGetLastError() != WSA_IO_PENDING)
@@ -743,9 +734,9 @@ namespace NaveNetLib {
 		INT ret = WSARecv(	newolp->sckClient,
 							&newolp->wbuf,
 							1,
-							&newolp->dwBytes,						// 만약 호출했을때 바로 받았다면 여기로 받은 크기가 넘어오지만 iocp에서는 의미가 없다.
+							&newolp->dwBytes,// 만약 호출했을때 바로 받았다면 여기로 받은 크기가 넘어오지만 iocp에서는 의미가 없다.
 							&newolp->dwFlags,
-							&newolp->overlapped,					// Overlapped 구조체 
+							&newolp->overlapped,// Overlapped 구조체 
 							NULL );
 		
 		// 에러 처리 
@@ -755,12 +746,14 @@ namespace NaveNetLib {
 			ReleaseRecvPacket(newolp);
 			return false;
 		}
+
 		return true;
 	}
 
 	bool NFConnection::GetClientIP(INT *iIP)
 	{
-		if (iIP == NULL) {
+		if (iIP == nullptr) 
+		{
 			return false;
 		}
 
@@ -780,13 +773,13 @@ namespace NaveNetLib {
 
 	bool NFConnection::GetClientIP(CHAR *szIP)
 	{
-		if (szIP == NULL) {
+		if (szIP == nullptr) {
 			return false;
 		}
 
 		if(!IsConnect())
 		{
-			szIP[0] = NULL;
+			szIP[0] = nullptr;
 			return false;
 		}
 
@@ -833,7 +826,8 @@ namespace NaveNetLib {
 	void NFConnection::Disconnect(bool bForce)
 	{
 		// 연결 되어있는지 확인 
-		if (!IsConnect()) {
+		if (!IsConnect()) 
+		{
 			return;
 		}
 
@@ -846,18 +840,19 @@ namespace NaveNetLib {
 		// 소켓과 리스너 상태 확인 
 		if(m_Socket)
 		{
-			struct linger li = {0, 0};								// Default: SO_DONTLINGER
+			struct linger li = {0, 0};	// Default: SO_DONTLINGER
 			shutdown(m_Socket, SD_BOTH );						
 
 			// 소켓에 처리 되지 않은 데이타가 소켓 버퍼에 남아있다면,
-			if (bForce) {
+			if (bForce) 
+			{
 				li.l_onoff = 1; // SO_LINGER, timeout = 0
 			}
 
 			// 잔여 데이타가 있으면 제거
 			setsockopt(m_Socket, SOL_SOCKET, SO_LINGER, (CHAR *)&li, sizeof(li));
-			closesocket(m_Socket);									// 소켓 닫기 
-			m_Socket = NULL;										// 초기화 
+			closesocket(m_Socket);	// 소켓 닫기 
+			m_Socket = NULL;		// 초기화 
 
 			ShowMessage(CLOSE_SOCKET);
 		}
@@ -869,13 +864,13 @@ namespace NaveNetLib {
 
 	bool NFConnection::IsConnect()
 	{
-		bool bRet = m_bIsConnect;
+		auto bRet = m_bIsConnect;
 		return bRet;
 	}
 
 	LONG NFConnection::GetRecvTickCnt()
 	{
-		LONG lRecvTickCount = m_uRecvTickCnt;
+		auto lRecvTickCount = m_uRecvTickCnt;
 		return lRecvTickCount;
 	}
 }
