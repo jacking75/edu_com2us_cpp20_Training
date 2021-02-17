@@ -133,7 +133,7 @@ namespace NaveNetLib {
 		vsprintf_s(szOutStr, lpszFmt, argptr);
 		va_end(argptr);
 		
-		INT nBytesWritten = fprintf( m_hLogFile, "%s\r\n", szOutStr );// LOG 내용 
+		//INT nBytesWritten = fprintf( m_hLogFile, "%s\r\n", szOutStr );// LOG 내용 
 		fflush( m_hLogFile );
 
 		return true;

@@ -109,7 +109,7 @@ namespace NaveNetLib {
 		 * @param Size		읽을 크기
 		 * @return	읽어들인 길이
 		 */
-		int		GetData(char* Buffer, int Size);
+		int		WriteData(char* Buffer, int Size);
 
 		/**
 		 * @brief	버퍼길이 체크합니다.
@@ -162,13 +162,13 @@ namespace NaveNetLib {
 
 	public:
 		/// 버퍼를 Lock 합니다.
-		void	Lock();
+		void	SetWriteStartMark();
 
 		/// 버퍼를 UnLock 합니다.
-		void	UnLock();
+		void	SetWriteEndMark();
 
 		// 한개분량의 패킷을 얻어온다.
-		int		GetPacket(NFPacket* Packet);
+		int		WritePacket(NFPacket* Packet);
 
 		// 패킷체크
 		bool	CheckPacket();

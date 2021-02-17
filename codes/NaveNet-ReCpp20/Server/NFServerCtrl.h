@@ -55,19 +55,17 @@ namespace NaveNetLib {
 		inline bool					IsRun() { return m_bServerRun; };
 		inline bool					IsPause() { return m_bPause; };
 
-		//static unsigned __stdcall	WINAPI	Thread_MainEx(LPVOID lpvoid);		// IOCP 구동 메인 Thread
-		//static unsigned __stdcall	WINAPI	Process_MainEx(LPVOID lpvoid);		// Process 처리 Thread
-		//static unsigned __stdcall	WINAPI	Packet_MainEx(LPVOID lpvoid);		// Packet 처리 Thread
 		void Thread_MainEx();		// IOCP 구동 메인 Thread
 		void Process_MainEx();		// Process 처리 Thread
 		void Packet_MainEx();		// Packet 처리 Thread
 
-		virtual void				Update();									// Process 처리 함수
+		virtual void Update();									// Process 처리 함수
 
-		virtual void				ShowServerInfo();							// 시작시 화면에 서버 정보 표시
+		virtual void ShowServerInfo();							// 시작시 화면에 서버 정보 표시
 
-		virtual bool				CreateSession(SOCKET sckListener) { return true; }		// Client Session 을 생성한다.
-		virtual bool				ReleaseSession() { return true; }	// Client Session 을 삭제한다.
+		virtual bool CreateSession([[maybe_unused]] SOCKET sckListener) { return true; } // Client Session 을 생성한다.
+		virtual bool ReleaseSession() { return true; }	// Client Session 을 삭제한다.
+
 
 	protected:
 
@@ -81,6 +79,7 @@ namespace NaveNetLib {
 		bool						Stop();										// 서버 정지 
 
 		void WSAGetLastErrorToTextMessage(char *pMsg);
+
 
 	protected:
 		INT							m_nMaxThreadNum;							// 최대 스레드 수 결정 

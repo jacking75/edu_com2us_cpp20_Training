@@ -1,7 +1,7 @@
 #pragma once
 
 
-enum PACKETLIST
+enum class PACKETLIST
 {
 	NONE = 0,
 	IRC = 1,

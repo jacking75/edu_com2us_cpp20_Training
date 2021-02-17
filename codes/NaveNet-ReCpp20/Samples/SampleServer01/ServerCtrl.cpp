@@ -49,7 +49,7 @@ void ServerCtrl::SendMsg(char* strParam)
 {
 	NaveNetLib::NFPacket packet;
 
-	packet.SetCommand(IRC);
+	packet.SetCommand((USHORT)PACKETLIST::IRC);
 	packet.SetSize(sizeof(PKIRC));
 
 	LPPKIRC lpIRC = (LPPKIRC)packet.m_Packet;
@@ -82,7 +82,6 @@ void ServerCtrl::UpdateInfo()
 
 void ServerCtrl::ShowServerInfo()
 {
-	// Join 시켰으니 Leave시켜야한다.
 	char	szDate[32] = { 0, }, szTime[32] = { 0, };
 	_tzset();
 	_strdate_s(szDate);
@@ -115,9 +114,9 @@ bool ServerCtrl::CreateSession(unsigned long long sckListener)
 		return false;
 	}
 
-	// pClientArray(Client Controler..)
-	if ((m_pLogin = new TestConnection[m_iMaxConn]) == NULL) {
-		return false;		// Create MAXUSER(1000) m_pLogin
+	if ((m_pLogin = new TestConnection[m_iMaxConn]) == NULL) 
+	{
+		return false;
 	}
 
 							// Initialize pClientArray

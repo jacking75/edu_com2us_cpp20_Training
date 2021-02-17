@@ -38,6 +38,7 @@ namespace NaveNetLib {
 		CONNECT_FAILED,
 		DISPATCH_FAILED,
 		DOIOSWITCH_FAILED,
+
 		// accept
 		ALLOCACPT_FAILED,
 		PREPAREACPT_FAILED,
@@ -61,7 +62,6 @@ namespace NaveNetLib {
 		RECVPOST_FAILED,
 		RECVPOSTPENDING_FAILED,
 
-//		ALLOCPROC_FAILED,
 		SENDPOST_FAILED,
 		SENDPOSTPENDING_FAILED,
 	};
@@ -76,13 +76,13 @@ namespace NaveNetLib {
 	};
 
 	/// 열거형 정의 : 클라이언트 작동 상태를 정의 한다 
-	typedef enum CONN_STATUS 
+	enum class CONN_STATUS
 	{
 		ClientIoUnknown,											/// Raw status
 		ClientIoAccept,												/// accept status 
 		ClientIoRead,												/// read status  
 		ClientIoWrite,												/// write status
-	}*pCONN_STATUS;
+	};
 
 	/// 확장 오버랩 구조체 : IOCP처리시 사용 
 	typedef struct OVERLAPPEDPLUS {

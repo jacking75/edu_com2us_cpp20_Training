@@ -15,8 +15,8 @@ void TestConnection::Init(NaveNetLib::NFConnectionManager* pNFConnectionManager)
 	m_pNFConnectionManager = pNFConnectionManager;
 
 	// 함수를 Map으로 선언한다.
-	OnMsgMap[IRC] = &TestConnection::Parsed_IRC;
-	OnMsgMap[TEST] = &TestConnection::Parsed_TEST;
+	OnMsgMap[(int)PACKETLIST::IRC] = &TestConnection::Parsed_IRC;
+	OnMsgMap[(int)PACKETLIST::TEST] = &TestConnection::Parsed_TEST;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -64,11 +64,12 @@ void TestConnection::OnDisconnect()
 	m_SendPacket.Init();
 }
 
-void TestConnection::Parsed_IRC(char* Packet, int Len)
+void TestConnection::Parsed_IRC(char* Packet, [[maybe_unused]] int len)
 {
-	LPPKIRC pkIRC = (LPPKIRC)Packet;
+	auto pkIRC = (LPPKIRC)Packet;
 		
-	char logMsg[DEF_PACKETSIZE];	memset(logMsg, 0, sizeof(logMsg));
+	char logMsg[DEF_PACKETSIZE];	
+	memset(logMsg, 0, sizeof(logMsg));
 	_snprintf_s(logMsg, _countof(logMsg), _TRUNCATE, "%s : %s", pkIRC->Key, pkIRC->Message);
 	std::cout << logMsg << std::endl;
 }
@@ -77,7 +78,7 @@ void TestConnection::Parsed_TEST(char* Packet, int Len)
 {
 	LPPKTEST pkTest = (LPPKTEST)Packet;
 
-	m_SendPacket.SetCommand(TEST);
+	m_SendPacket.SetCommand((USHORT)PACKETLIST::TEST);
 	m_SendPacket.SetSize(sizeof(PKTEST));
 	memcpy(m_SendPacket.m_Packet, pkTest->Message, Len);
 
@@ -86,7 +87,7 @@ void TestConnection::Parsed_TEST(char* Packet, int Len)
 
 void TestConnection::Send_IRC(const char* strCommand, const char* strMsg)
 {
-	m_SendPacket.SetCommand(IRC);
+	m_SendPacket.SetCommand((USHORT)PACKETLIST::IRC);
 	m_SendPacket.SetSize(sizeof(PKIRC));
 
 	LPPKIRC lpIRC = (LPPKIRC)m_SendPacket.m_Packet;

@@ -58,16 +58,12 @@ namespace NaveNetLib {
 		m_RecvIO.InitIOBuf();	// 패킷버퍼를 초기화한다.
 		
  		m_Socket = WSASocket( AF_INET, SOCK_STREAM, IPPROTO_IP,NULL,0,WSA_FLAG_OVERLAPPED );
-
-		// 현재 소켓이 제대로 생성 되었는지 검사 
 		if (m_Socket == NULL) 
 		{
 			return false;
 		}
 
-		// Accpet할 오버랩구조체와 패킷버퍼를 준비한다.
 		auto newolp = PrepareAcptPacket();
-
 		if(newolp == nullptr) 
 		{
 			closesocket(m_Socket);
@@ -75,9 +71,6 @@ namespace NaveNetLib {
 			return false;
 		}
 
-		/////////////////////////////////////////////////////////////////////
-		// Socket과 Listener와 연결
-		// Overlapped에 들어가는 변수가 나중에 IOCP 이벤트 발생 처리에 쓰인다
 		char acceptDummyBuf[64] = {0, };
 		bool bRet = AcceptEx(newolp->sckListen,		// Listen Socket
 							newolp->sckClient,		// Socket
@@ -88,7 +81,6 @@ namespace NaveNetLib {
 							&newolp->dwBytes,	// 처리 바이트 크기 
 							&newolp->overlapped);	// *중요*
 
-		// 에러 처리 
 		if(!bRet && WSAGetLastError() != WSA_IO_PENDING)
 		{
 			ShowMessage(ACCEPT_FAILED);
@@ -98,49 +90,28 @@ namespace NaveNetLib {
 			return false;
 		}
 
-		/////////////////////////////////
-		// 소켓의 성능 최적화를 위한 세팅 
-		INT zero = 0;
-		INT err = 0;
-
-		// Send Buffer에 대한 세팅
-		if( (err = setsockopt( m_Socket, SOL_SOCKET, SO_SNDBUF, (CHAR *)&zero, sizeof(zero))) == SOCKET_ERROR)
+		if (SetSystemSocketBuffer(m_Socket, newolp) == false)
 		{
-			ShowMessage(ACCEPT_FAILED);
-			closesocket(m_Socket);
-			m_Socket = NULL;
-			ReleaseAcptPacket(newolp);
 			return false;
 		}
-
-		// Receive Buffer에 대한 세팅 
-		if((err = setsockopt( m_Socket, SOL_SOCKET, SO_RCVBUF, (CHAR *)&zero, sizeof(zero) )) == SOCKET_ERROR)
-		{
-			ShowMessage(ACCEPT_FAILED);
-			closesocket(m_Socket);
-			m_Socket = NULL;
-			ReleaseAcptPacket(newolp);
-			return false;
-		}
-
-		// 변수 초기화 
+		
+		
 		InterlockedExchange((LONG*)&m_bIsConnect,0);
 		Clear();
-
 		m_uRecvTickCnt = 0 ;
 
 		return true;
 	}
-
+	
 	bool NFConnection::Close_Open( bool bForce )
 	{
-		// 소켓과 리스너 상태 확인 
 		// Disconnect 함수안에서 OnDisconnect(), Clear() 이 호출된다.
 		Disconnect(bForce);
 
-		// 이 패킷 다시 초기화 
+		// 이 세션 다시 초기화 
 		if(!Open())
 		{
+			//TODO Open() 실패 시 추가 작업 필요
 			// 실패하면 어떻게 해야 하는가? 이 컨넥션 클래스는 죽은 클래스가 된다.
 			// 뭔가 죽은 상태를 표시해주고 체크하자. 그리고 나중에 타이머에서 다시 초기화 해본다.
 			ShowMessage(DEAD_CONNECTION);
@@ -148,158 +119,23 @@ namespace NaveNetLib {
 			return false;
 		}
 
-		return true;												// 정상 처리 
+		return true;	
 	}
-
-	void NFConnection::ShowMessage(INT MsgIndex)
-	{
-		switch(MsgIndex)
-		{
-		case ACCEPT_FAILED:
-			//LOG_ERROR((L"[%04d] AcceptEx(): SOCKET_ERROR, %d.", GetIndex(), WSAGetLastError()));
-			break;
-		case CLOSE_SOCKET:
-			//LOG_INFO((L"[%04d] 접속 해제.", GetIndex()));
-			break;
-		case DEAD_CONNECTION:
-			//LOG_ERROR((L"[%04d] Dead Connection.", GetIndex()));
-			break;
-		case CONNECT_SUCCESS:
-			//LOG_INFO((L"[%04d] 접속 성공.", GetIndex()));
-			break;
-		case CONNECT_FAILED:
-			//LOG_ERROR((L"[%04d] 접속 실패 (Check Sum 오류).", GetIndex()));
-			break;
-		case DISPATCH_FAILED:
-			//LOG_ERROR((L"[%04d] Dispatch return false.", GetIndex()));
-			break;
-		case DOIOSWITCH_FAILED:
-			//LOG_ERROR((L"[%04d] DoIo(..) - Switch Default.", GetIndex()));
-			break;
-		case ALLOCACPT_FAILED:
-			//LOG_ERROR((L"[%04d] PrepareAcptPacket() acpt packet alloc failed.", GetIndex()));
-			break;
-		case PREPAREACPT_FAILED:
-			//LOG_ERROR((L"[%04d] PrepareAcptPacket().newolp == NULL.", GetIndex()));
-			break;
-		case PREPARERECVSIZE_FAILED:
-			//LOG_ERROR((L"[%04d] PrepareRecvPacket() srclen > m_nMaxPacketSize.", GetIndex()));
-			break;
-		case PREPARESENDSIZE_FAILED:
-			//LOG_ERROR((L"[%04d] PrepareSendPacket() srclen > m_nMaxPacketSize.", GetIndex()));
-			break;
-		case ALLOCRECV_FAILED:
-			//LOG_ERROR((L"[%04d] PrepareRecvPacket() recv packet alloc failed.", GetIndex()));
-			break;
-		case ALLOCSEND_FAILED:
-			//LOG_ERROR((L"[%04d] PrepareSendPacket() send packet alloc failed.", GetIndex()));
-			break;
-		case PREPARERECV_FAILED:
-			//LOG_ERROR((L"[%04d] PrepareRecvPacket().newolp == NULL.", GetIndex()));
-			break;
-		case PREPARESEND_FAILED:
-			//LOG_ERROR((L"[%04d] PrepareSendPacket().newolp == NULL.", GetIndex()));
-			break;
-		case RELEASEACPT_FAILED:
-			//LOG_ERROR((L"[%04d] ReleaseAcptPacket() free acpt packet failed.", GetIndex()));
-			break;
-		case RELEASERECV_FAILED:
-			//LOG_ERROR((L"[%04d] ReleaseRecvPacket() free recv packet failed.", GetIndex()));
-			break;
-		case RELEASESEND_FAILED:
-			//LOG_ERROR((L"[%04d] ReleaseSendPacket() free send packet failed.", GetIndex()));
-			break;
-		case BINDIOCP_FAILED:
-			//LOG_ERROR((L"[%04d] BindIOCP().lpOverlapPlus == NULL.", GetIndex()));
-			break;
-		case RECVPOST_FAILED:
-			//LOG_ERROR((L"[%04d] RecvPost() m_Socket == NULL or IsConnect() == false.", GetIndex()));
-			break;
-		case RECVPOSTPENDING_FAILED:
-			//LOG_ERROR((L"[%04d] RecvPost().WSARecv() == SOCKET_ERROR, %d.", GetIndex(), WSAGetLastError()));
-			break;
-		case SENDPOSTPENDING_FAILED:
-			//LOG_ERROR((L"[%04d] SendPost().WSASend() == SOCKET_ERROR, %d.", GetIndex(), WSAGetLastError()));
-			break;
-		case SENDPOST_FAILED:
-			//LOG_ERROR((L"[%04d] SendPost() == SOCKET_ERROR, %d.", GetIndex(), WSAGetLastError()));
-			break;
-		}
-	}
-
-	bool NFConnection::DoIo( LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager)
-	{
+		
+	bool NFConnection::DoIo(LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager)
+	{		
 		// 할당 패킷의 상태 확인 
 		switch(lpOverlapPlus->nConnState)
 		{
-		// ACCEPT관련 처리
-		case ClientIoAccept:
-			BindIOCP(lpOverlapPlus);							// 현재 소켓과 IOCP 바인딩 처리 
-
-			InterlockedIncrement((LONG*)&m_bIsConnect);		// 접속 상태 변수 ON !!!
-			
-			SetConnectFlag(CONNECT_true, pUpdateManager);
-
-			//AccpetEx 에서 클라이언트 접속 후 데이터를 보낼 때만 Accept 이벤트를 받는 경우 아래 코드를 활성화 한다.
-			//// 검사된 연결자 아난 경우 연결 해제 
-			//if(lpOverlapPlus->dwBytes && strncmp(lpOverlapPlus->wbuf.buf,CONNECT_CHECK_DATA,CONNECT_CHECK_SIZE) == 0)
-			//{
-			//	ShowMessage(CONNECT_SUCCESS);
-			//	SetConnectFlag(CONNECT_true, pUpdateManager);
-			//}
-			//else
-			//{
-			//	ShowMessage(CONNECT_FAILED);
-			//	//LOG_ERROR((L"[%04d] Check Sum : %d, %s.", GetIndex(), lpOverlapPlus->dwBytes, lpOverlapPlus->wbuf.buf));
-			//	SetConnectFlag(CONNECT_false, pUpdateManager);
-			//	ReleaseAcptPacket( lpOverlapPlus );
-			//	break;
-			//}
-
-			// Accept 할당 패킷 해제 
-			if(!RecvPost())
-			{
-				SetClose_Open(lpOverlapPlus, pUpdateManager);
-				break;
-			}
-
-			// TICK 카운트 설정 
-			InterlockedExchange((LONG*)&m_uRecvTickCnt,timeGetTime());
-
-			ReleaseAcptPacket( lpOverlapPlus );
+		case CONN_STATUS::ClientIoAccept:
+			DoIoAccept(lpOverlapPlus, pUpdateManager);
 			break;
 
-		// RECEIVE 관련 처리 
-		case ClientIoRead:
-			// TICK 카운트 설정 
-			InterlockedExchange((LONG*)&m_uRecvTickCnt,timeGetTime());
-
-			// 처리 데이타가 없다면 
-			if(lpOverlapPlus->dwBytes == 0)
-			{
-				SetClose_Open(lpOverlapPlus, pUpdateManager, false);			// 에러, 객체 다시 초기화 
-			}
-			else if((INT)lpOverlapPlus->dwBytes == SOCKET_ERROR) // 에러라면 
-			{
-				SetClose_Open(lpOverlapPlus, pUpdateManager, true);			// 에러, 객체 다시 초기화 
-			}
-			else// 정상이라면 
-			{
-				// 메세지 저장 
-				if(!DispatchPacket(lpOverlapPlus, pUpdateManager))
-				{
-					ShowMessage(DISPATCH_FAILED);
-					SetClose_Open( lpOverlapPlus, pUpdateManager, true );
-				}
-				else
-				{
-					// Receive 할당 패킷 해제 
-					ReleaseRecvPacket( lpOverlapPlus );
-				}
-			}
+		case CONN_STATUS::ClientIoRead:
+			DoIoRead(lpOverlapPlus, pUpdateManager);
 			break;
 
-		case ClientIoWrite:
+		case CONN_STATUS::ClientIoWrite:
 			ReleaseSendPacket( lpOverlapPlus );
 			break;
 
@@ -309,6 +145,57 @@ namespace NaveNetLib {
 			break;
 		}
 		return true;
+	}
+
+	void NFConnection::DoIoAccept(LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager)
+	{
+		BindIOCP(lpOverlapPlus);					// 현재 소켓과 IOCP 바인딩 처리 
+
+		InterlockedIncrement((LONG*)&m_bIsConnect);	// 접속 상태 변수 ON !!!
+
+		SetConnectFlag(CONNECT_true, pUpdateManager);
+
+		// Accept 할당 패킷 해제 
+		if (!RecvPost())
+		{
+			SetClose_Open(lpOverlapPlus, pUpdateManager);
+			return;
+		}
+
+		// TICK 카운트 설정 
+		InterlockedExchange((LONG*)&m_uRecvTickCnt, timeGetTime());
+
+		ReleaseAcptPacket(lpOverlapPlus);
+	}
+
+	void NFConnection::DoIoRead(LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager)
+	{
+		// TICK 카운트 설정 
+		InterlockedExchange((LONG*)&m_uRecvTickCnt, timeGetTime());
+
+		// 처리 데이타가 없다면 
+		if (lpOverlapPlus->dwBytes == 0)
+		{
+			SetClose_Open(lpOverlapPlus, pUpdateManager, false);// 에러, 객체 다시 초기화 
+		}
+		else if ((INT)lpOverlapPlus->dwBytes == SOCKET_ERROR) // 에러라면 
+		{
+			SetClose_Open(lpOverlapPlus, pUpdateManager, true);	// 에러, 객체 다시 초기화 
+		}
+		else// 정상이라면 
+		{
+			// 메세지 저장 
+			if (!DispatchPacket(lpOverlapPlus, pUpdateManager))
+			{
+				ShowMessage(DISPATCH_FAILED);
+				SetClose_Open(lpOverlapPlus, pUpdateManager, true);
+			}
+			else
+			{
+				// Receive 할당 패킷 해제 
+				ReleaseRecvPacket(lpOverlapPlus);
+			}
+		}
 	}
 
 	LPOVERLAPPEDPLUS NFConnection::PrepareAcptPacket()
@@ -336,12 +223,9 @@ namespace NaveNetLib {
 		// init olp structure
 		newolp->sckListen	= m_sckListener;
 		newolp->sckClient	= m_Socket;
-		newolp->nConnState	= ClientIoAccept;
+		newolp->nConnState	= CONN_STATUS::ClientIoAccept;
 		newolp->pClientConn = (void*)this;
-		newolp->wbuf.len	= CONNECT_CHECK_SIZE;					//	newolp->wbuf.len	= MAXPACKETSIZE;
-																	// ** WARNING ** 
-																	// When you change your packet certfying correct connection,
-																	// you must change the size of definition 'CONNECT_CHECK_SIZE'.
+		newolp->wbuf.len = 0;
 		return newolp;
 	}
 
@@ -356,7 +240,6 @@ namespace NaveNetLib {
 
 		LPOVERLAPPEDPLUS newolp = nullptr;
 
-		// get recv overlapped structure and packet buffer.
 		if( false == m_pPacketPool->AllocRecvPacket(newolp) )
 		{
 			ShowMessage(ALLOCRECV_FAILED);
@@ -377,15 +260,14 @@ namespace NaveNetLib {
 		// init olp structure
 		newolp->sckListen	= m_sckListener;
 		newolp->sckClient	= m_Socket;
-		newolp->nConnState	= ClientIoRead;
+		newolp->nConnState	= CONN_STATUS::ClientIoRead;
 		newolp->pClientConn = (void*)this;
+		newolp->wbuf.len = srclen;
 
-		if (srclen == 0) {
+		if (srclen == 0) 
+		{
 			newolp->wbuf.len = m_nMaxPacketSize;
-		}
-		else {
-			newolp->wbuf.len = srclen;
-		}
+		}		
 
 		return newolp;
 	}
@@ -422,7 +304,7 @@ namespace NaveNetLib {
 		// init olp structure
 		newolp->sckListen	= m_sckListener;
 		newolp->sckClient	= m_Socket;
-		newolp->nConnState	= ClientIoWrite;
+		newolp->nConnState	= CONN_STATUS::ClientIoWrite;
 		newolp->pClientConn = (void*)this;
 		newolp->wbuf.len	= srclen; 
 		memcpy(newolp->wbuf.buf,psrcbuf,srclen);
@@ -432,11 +314,13 @@ namespace NaveNetLib {
 
 	bool NFConnection::ReleaseAcptPacket(LPOVERLAPPEDPLUS olp)
 	{
-		if (NULL == olp) {
+		if (olp == nullptr) 
+		{
 			return false;
 		}
 
-		if (NULL == olp->wbuf.buf) {
+		if (olp->wbuf.buf == nullptr) 
+		{
 			return false;
 		}
 
@@ -451,11 +335,11 @@ namespace NaveNetLib {
 
 	bool NFConnection::ReleaseRecvPacket(LPOVERLAPPEDPLUS olp)
 	{
-		if (olp == NULL) {
+		if (olp == nullptr) {
 			return false;
 		}
 
-		if (olp->wbuf.buf == NULL) {
+		if (olp->wbuf.buf == nullptr) {
 			return false;
 		}
 
@@ -469,11 +353,11 @@ namespace NaveNetLib {
 
 	bool NFConnection::ReleaseSendPacket(LPOVERLAPPEDPLUS olp)
 	{
-		if (olp == NULL) {
+		if (olp == nullptr) {
 			return false;
 		}
 
-		if (olp->wbuf.buf == NULL) {
+		if (olp->wbuf.buf == nullptr) {
 			return false;
 		}
 
@@ -495,7 +379,6 @@ namespace NaveNetLib {
 		}
 
 		INT	locallen = 0, remotelen = 0;
-
 		sockaddr_in *	plocal = 0;
 		sockaddr_in *	premote	= 0;
 
@@ -504,16 +387,17 @@ namespace NaveNetLib {
 			0,//m_nMaxBuf,
 			sizeof(sockaddr_in) + 16,
 			sizeof(sockaddr_in) + 16,
-			(sockaddr **)&plocal,									// 서버단 
+			(sockaddr **)&plocal,				// 서버단 
 			&locallen,
-			(sockaddr **)&premote,									// 로컬단 
+			(sockaddr **)&premote,				// 로컬단 
 			&remotelen
 		);
 
 		memcpy(&m_Local, plocal, sizeof(sockaddr_in));
 		memcpy(&m_Peer, premote, sizeof(sockaddr_in));
 
-		if (CreateIoCompletionPort((HANDLE)lpOverlapPlus->sckClient, m_hIOCP, 0, 0) == 0) {
+		if (CreateIoCompletionPort((HANDLE)lpOverlapPlus->sckClient, m_hIOCP, 0, 0) == 0) 
+		{
 			return false;
 		}
 
@@ -528,22 +412,22 @@ namespace NaveNetLib {
 		}
 
 		// 할당 패킷 상태 검사후 패킷 할당 해제 
-		if(NULL != lpOverlapPlus)
+		if(lpOverlapPlus != nullptr)
 		{
-			if(NULL != lpOverlapPlus->wbuf.buf && NULL != m_pPacketPool)
+			if(lpOverlapPlus->wbuf.buf != nullptr && m_pPacketPool != nullptr)
 			{
 				// 마지막으로 완료 되었던 오버랩구조체와 버퍼를 릴리즈한다.
 				switch( lpOverlapPlus->nConnState)
 				{
-				case ClientIoAccept:
+				case CONN_STATUS::ClientIoAccept:
 					ReleaseAcptPacket( lpOverlapPlus );
 					break;
 
-				case ClientIoRead:
+				case CONN_STATUS::ClientIoRead:
 					ReleaseRecvPacket( lpOverlapPlus );
 					break;
 
-				case ClientIoWrite:
+				case CONN_STATUS::ClientIoWrite:
 					ReleaseSendPacket( lpOverlapPlus );
 					break;
 
@@ -554,7 +438,6 @@ namespace NaveNetLib {
 		}
 
 		m_bForce = bForce;
-
 		InterlockedExchange((LONG*)&m_eConnectFlag,CLOSEOPEN_true);
 
 		pUpdateManager->Add(this, NULL);
@@ -564,6 +447,7 @@ namespace NaveNetLib {
 	{
 		if(m_eConnectFlag != CONNECT_NONE)
 		{
+			//TODO 로그 사용하기
 			//LOG_ERROR((L"NFConnection::SetConnectFlag() m_eConnectFlag == %s", (int)m_eConnectFlag));
 		}
 
@@ -574,24 +458,16 @@ namespace NaveNetLib {
 
 	bool NFConnection::DispatchPacket(LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager)
 	{
-		// Read같은경우 RecvPost 할때 마다 1번 발생하는데 현재
-		// Read할때 RecvPost를 1번만 하기 대문에 스레드가 아무리 많아도.DispatchPacket은 1번만 일어난다.
-
 		CHAR*  psrcbuf     =	&( lpOverlapPlus->wbuf.buf[0] );
 		INT     srclen     =    lpOverlapPlus->dwBytes;
 
 		// Packet정보 자체가 [H 2byte][P size] 형식이다.
 		m_RecvIO.Append(psrcbuf, srclen);
 
-		m_RecvIO.Lock();
+		m_RecvIO.SetWriteStartMark();
 
-		// IOCP는 스레드 패킷처리에 의한 성능향상이 주 능력이다
-		// 그런데 아래와 같이 UpdateManaget에 패킷을 넣은후 주 스레드에서 Update를 처리하면
-		// 데드락같은 문제는 생기지 않지만 다중처리에 의한 성능향상이 생기지 않는다.
-		// 패킷은 스레드 상태에서 바로 처리하게 수정하고 UpdateManager은 커넥트 플래스를
-		// 업데이트 하는걸로 제한해보자. 
 #ifdef ENABLE_UPDATEQUE
-		if(m_RecvIO.GetPacket(&m_RecvPacket) == 1)
+		if(m_RecvIO.WritePacket(&m_RecvPacket) == 1)
 		{
 			m_RecvPacket.DecryptPacket();
 
@@ -603,7 +479,7 @@ namespace NaveNetLib {
 		}
 		else 
 		{
-			m_RecvIO.UnLock();
+			m_RecvIO.SetWriteEndMark();
 		}
 #else
 		// 아래와 같이 스레드에서 패킷을 처리하게 되면 
@@ -665,11 +541,13 @@ namespace NaveNetLib {
 
 	bool NFConnection::SendPost( CHAR* pPackte, INT Len )
 	{
-		if (!m_Socket) {
+		if (!m_Socket) 
+		{
 			return false;
 		}
 
-		if (!IsConnect()) {
+		if (!IsConnect()) 
+		{
 			return false;
 		}
 
@@ -681,21 +559,19 @@ namespace NaveNetLib {
 
 		// prepare recieve buffer
 		LPOVERLAPPEDPLUS newolp = PrepareSendPacket(pPackte,Len);
-
-		// 제대로 할당 받았는지 조사
-		if (newolp == nullptr) {
+		if (newolp == nullptr) 
+		{
 			return false;
 		}
 
 		INT ret = WSASend(	newolp->sckClient,
 							&newolp->wbuf,
 							1,
-							&newolp->dwBytes,						// 만약 호출했을때 바로 받았다면 여기로 받은 크기가 넘어오지만 iocp에서는 의미가 없다.
+							&newolp->dwBytes,
 							newolp->dwFlags,
-							&newolp->overlapped,					// Overlapped 구조체 
+							&newolp->overlapped,
 							NULL );
 		
-		// 에러 처리 
 		if(ret == SOCKET_ERROR && WSAGetLastError() != WSA_IO_PENDING)
 		{
 			ShowMessage(SENDPOSTPENDING_FAILED);
@@ -779,7 +655,7 @@ namespace NaveNetLib {
 
 		if(!IsConnect())
 		{
-			szIP[0] = nullptr;
+			szIP[0] = NULL;
 			return false;
 		}
 
@@ -872,5 +748,110 @@ namespace NaveNetLib {
 	{
 		auto lRecvTickCount = m_uRecvTickCnt;
 		return lRecvTickCount;
+	}
+
+
+	bool NFConnection::SetSystemSocketBuffer(SOCKET socket, LPOVERLAPPEDPLUS overlapped)
+	{
+		INT zero = 0;
+		INT err = 0;
+
+		// Send Buffer에 대한 세팅
+		if ((err = setsockopt(socket, SOL_SOCKET, SO_SNDBUF, (CHAR*)&zero, sizeof(zero))) == SOCKET_ERROR)
+		{
+			ShowMessage(ACCEPT_FAILED);
+			closesocket(socket);
+			socket = NULL;
+			ReleaseAcptPacket(overlapped);
+			return false;
+		}
+
+		// Receive Buffer에 대한 세팅 
+		if ((err = setsockopt(socket, SOL_SOCKET, SO_RCVBUF, (CHAR*)&zero, sizeof(zero))) == SOCKET_ERROR)
+		{
+			ShowMessage(ACCEPT_FAILED);
+			closesocket(socket);
+			socket = NULL;
+			ReleaseAcptPacket(overlapped);
+			return false;
+		}
+
+		return true;
+	}
+
+	void NFConnection::ShowMessage(INT MsgIndex)
+	{
+		switch (MsgIndex)
+		{
+		case ACCEPT_FAILED:
+			//LOG_ERROR((L"[%04d] AcceptEx(): SOCKET_ERROR, %d.", GetIndex(), WSAGetLastError()));
+			break;
+		case CLOSE_SOCKET:
+			//LOG_INFO((L"[%04d] 접속 해제.", GetIndex()));
+			break;
+		case DEAD_CONNECTION:
+			//LOG_ERROR((L"[%04d] Dead Connection.", GetIndex()));
+			break;
+		case CONNECT_SUCCESS:
+			//LOG_INFO((L"[%04d] 접속 성공.", GetIndex()));
+			break;
+		case CONNECT_FAILED:
+			//LOG_ERROR((L"[%04d] 접속 실패 (Check Sum 오류).", GetIndex()));
+			break;
+		case DISPATCH_FAILED:
+			//LOG_ERROR((L"[%04d] Dispatch return false.", GetIndex()));
+			break;
+		case DOIOSWITCH_FAILED:
+			//LOG_ERROR((L"[%04d] DoIo(..) - Switch Default.", GetIndex()));
+			break;
+		case ALLOCACPT_FAILED:
+			//LOG_ERROR((L"[%04d] PrepareAcptPacket() acpt packet alloc failed.", GetIndex()));
+			break;
+		case PREPAREACPT_FAILED:
+			//LOG_ERROR((L"[%04d] PrepareAcptPacket().newolp == NULL.", GetIndex()));
+			break;
+		case PREPARERECVSIZE_FAILED:
+			//LOG_ERROR((L"[%04d] PrepareRecvPacket() srclen > m_nMaxPacketSize.", GetIndex()));
+			break;
+		case PREPARESENDSIZE_FAILED:
+			//LOG_ERROR((L"[%04d] PrepareSendPacket() srclen > m_nMaxPacketSize.", GetIndex()));
+			break;
+		case ALLOCRECV_FAILED:
+			//LOG_ERROR((L"[%04d] PrepareRecvPacket() recv packet alloc failed.", GetIndex()));
+			break;
+		case ALLOCSEND_FAILED:
+			//LOG_ERROR((L"[%04d] PrepareSendPacket() send packet alloc failed.", GetIndex()));
+			break;
+		case PREPARERECV_FAILED:
+			//LOG_ERROR((L"[%04d] PrepareRecvPacket().newolp == NULL.", GetIndex()));
+			break;
+		case PREPARESEND_FAILED:
+			//LOG_ERROR((L"[%04d] PrepareSendPacket().newolp == NULL.", GetIndex()));
+			break;
+		case RELEASEACPT_FAILED:
+			//LOG_ERROR((L"[%04d] ReleaseAcptPacket() free acpt packet failed.", GetIndex()));
+			break;
+		case RELEASERECV_FAILED:
+			//LOG_ERROR((L"[%04d] ReleaseRecvPacket() free recv packet failed.", GetIndex()));
+			break;
+		case RELEASESEND_FAILED:
+			//LOG_ERROR((L"[%04d] ReleaseSendPacket() free send packet failed.", GetIndex()));
+			break;
+		case BINDIOCP_FAILED:
+			//LOG_ERROR((L"[%04d] BindIOCP().lpOverlapPlus == NULL.", GetIndex()));
+			break;
+		case RECVPOST_FAILED:
+			//LOG_ERROR((L"[%04d] RecvPost() m_Socket == NULL or IsConnect() == false.", GetIndex()));
+			break;
+		case RECVPOSTPENDING_FAILED:
+			//LOG_ERROR((L"[%04d] RecvPost().WSARecv() == SOCKET_ERROR, %d.", GetIndex(), WSAGetLastError()));
+			break;
+		case SENDPOSTPENDING_FAILED:
+			//LOG_ERROR((L"[%04d] SendPost().WSASend() == SOCKET_ERROR, %d.", GetIndex(), WSAGetLastError()));
+			break;
+		case SENDPOST_FAILED:
+			//LOG_ERROR((L"[%04d] SendPost() == SOCKET_ERROR, %d.", GetIndex(), WSAGetLastError()));
+			break;
+		}
 	}
 }

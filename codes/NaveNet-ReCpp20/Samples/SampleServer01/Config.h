@@ -47,8 +47,8 @@ public:
 	Config(void) = default;
 	~Config(void) = default;
 
-	void	Load(const wchar_t* strFile = L"Config.xml") { m_Config.Deserialize(); }
-	void	Save(const wchar_t* strFile = L"Config.xml") {}
+	void	Load([[maybe_unused]] const wchar_t* strFile = L"Config.xml") { m_Config.Deserialize(); }
+	void	Save([[maybe_unused]] const wchar_t* strFile = L"Config.xml") {}
 
 	const char*	GetTitle() { return m_Config.Global.Title.c_str(); };
 	unsigned int	GetID() { return m_Config.Global.ID; };

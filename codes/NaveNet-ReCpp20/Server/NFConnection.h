@@ -82,6 +82,10 @@ namespace NaveNetLib
 		 */
 		virtual bool DoIo( LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager);
 
+		void DoIoRead(LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager);
+
+		void DoIoAccept(LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager);
+
 		/**
 		 * @brief	패킷 전송
 		 * @param pPackte 보낼 패킷 포인터
@@ -171,6 +175,8 @@ namespace NaveNetLib
 		 */
 		virtual bool Open();
 
+		bool SetSystemSocketBuffer(SOCKET socket, LPOVERLAPPEDPLUS overlapped);
+
 		/**
 		 * @brief	Socket과 IOCP 바인딩 작업
 		 * @param lpOverlapPlus 바인딩 시킬 Overlapped 구조체
@@ -227,6 +233,8 @@ namespace NaveNetLib
 		 */
 		bool RecvPost(UINT buflen=0);
 
+
+
 		/**
 		 * @brief	로그에 메시지를 출력합니다.
 		 * @param MsgIndex 메시지 아이디
@@ -237,7 +245,7 @@ namespace NaveNetLib
 		 * @brief	 연결자에서 Connect 이벤트 발생
 		 * @param bConnect Connect 성공여부
 		 */
-		virtual void OnConnect(bool bConnect) { };
+		virtual void OnConnect([[maybe_unused]] bool bConnect) { };
 
 		/// Disconnect 이벤트 발생
 		virtual	void OnDisconnect() { };
@@ -255,7 +263,7 @@ namespace NaveNetLib
 		 * @brief	실제 패킷을 처리하는 부분이다
 		 * @param Packet 처리할 패킷 구조체
 		 */
-		virtual void DispatchPacket( NFPacket& Packet ) 
+		virtual void DispatchPacket([[maybe_unused]] NFPacket& Packet )
 		{
 			// 상속받아서 패킷을 처리할때는 아래와 같이 세션 변수를 등록해서 사용한다.
 			//Nave::Sync::CSSync Live(&m_Sync);

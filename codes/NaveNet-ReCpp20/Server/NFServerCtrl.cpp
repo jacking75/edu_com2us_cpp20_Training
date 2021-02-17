@@ -16,18 +16,15 @@ namespace NaveNetLib {
 	//////////////////////////////////////////////////////////////////////
 	NFServerCtrl::NFServerCtrl()
 	{
-		m_bServerRun	= false;							// 서버 구동상태
+		m_bServerRun	= false;			// 서버 구동상태
 		m_bPause		= false;
 
-		m_nMaxThreadNum	= (GetNumberOfProcess() * 2);								// CPU수 * 2개로 Thread 수 결정 
+		m_nMaxThreadNum	= (GetNumberOfProcess() * 2);	// CPU수 * 2개로 Thread 수 결정 
 
 		m_iPort			= 0;
 		m_iMaxConn		= 50;
 
-		//m_pWorkThread		= NULL;								// 메인 스레드 핸들 
-		//m_hProcThread	= 0;
-		//m_hPacketThread  = 0;
-		m_hIOCP			= NULL;								// IOCP 핸들 
+		m_hIOCP			= NULL;					
 		m_pUpdateManager = new NFUpdateManager();
 	}
 
@@ -79,7 +76,7 @@ namespace NaveNetLib {
 		SOCKADDR_IN serveraddr;
 		ZeroMemory(&serveraddr, sizeof(serveraddr));
 		serveraddr.sin_family = AF_INET;
-		serveraddr.sin_port = htons(nServerPort);
+		serveraddr.sin_port = htons((u_short)nServerPort);
 		serveraddr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 		if (bind(Socket, (SOCKADDR *)&serveraddr, sizeof(serveraddr)) == SOCKET_ERROR) {
@@ -262,7 +259,6 @@ namespace NaveNetLib {
 
 		// [00] 변수 및 객체 선언 
 		INT				nCnt = 0;									// 루프 변수  
-		//UINT			nDummy;										// 쓰레기 값 처리 
 		SOCKET			skListener;
 
 		// [01] initialize socket library
@@ -584,7 +580,7 @@ namespace NaveNetLib {
 		}
 	}
 	
-	void NFServerCtrl::WSAGetLastErrorToTextMessage(char *pMsg)
+	void NFServerCtrl::WSAGetLastErrorToTextMessage([[maybe_unused]] char *pMsg)
 	{
 		LPVOID lpMsgBuf;
 		auto errorCode = WSAGetLastError();

@@ -87,8 +87,8 @@ namespace NaveNetLib {
 		saServer.sin_family = AF_INET;
 		//saServer.sin_addr.s_addr = inet_addr(strIP);
 		//saServer.sin_port = htons(m_iPort);
-		auto ret = inet_pton(AF_INET, strIP, (void *)&saServer.sin_addr.s_addr);
-		saServer.sin_port = htons(m_iPort);
+		[[maybe_unused]] auto ret = inet_pton(AF_INET, strIP, (void *)&saServer.sin_addr.s_addr);
+		saServer.sin_port = htons((u_short)m_iPort);
 
 		// 서버와 Connect
 		INT nRet = connect(m_Socket,(sockaddr*)&saServer, sizeof(saServer));
@@ -201,7 +201,7 @@ namespace NaveNetLib {
 		// Packet정보 자체가 [H 2byte][P size] 형식이다.
 		m_RecvIO.Append(psrcbuf, srclen);
 
-		m_RecvIO.Lock();
+		m_RecvIO.SetWriteStartMark();
 
 		// IOCP는 스레드 패킷처리에 의한 성능향상이 주 능력이다
 		// 그런데 아래와 같이 UpdateManaget에 패킷을 넣은후 주 스레드에서 Update를 처리하면
@@ -209,7 +209,7 @@ namespace NaveNetLib {
 		// 패킷은 스레드 상태에서 바로 처리하게 수정하고 UpdateManager은 커넥트 플래스를
 		// 업데이트 하는걸로 제한해보자. 
 #ifdef ENABLE_UPDATEQUE
-		if(m_RecvIO.GetPacket(&m_RecvPacket) == 1)
+		if(m_RecvIO.WritePacket(&m_RecvPacket) == 1)
 		{
 			if (m_RecvPacket.IsAliveChecksum()) {
 				pUpdateManager->Add(this, &m_RecvPacket);
@@ -219,7 +219,7 @@ namespace NaveNetLib {
 		}
 		else
 		{
-			m_RecvIO.UnLock();
+			m_RecvIO.SetWriteEndMark();
 		}
 #else
 		// 아래와 같이 스레드에서 패킷을 처리하게 되면 

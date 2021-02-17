@@ -91,7 +91,7 @@ namespace NaveNetLib {
 	bool GetLine(const CHAR* sBuf, INT maxsBuf, CHAR* tBuf, INT maxtBuf, LONG& index)
 	{
 		ZeroMemory(tBuf, sizeof(tBuf));
-		INT DestIndex = index;
+		//INT DestIndex = index;
 
 		auto pLine = "\n";
 		auto pLen = (INT)strlen(pLine);
@@ -121,7 +121,7 @@ namespace NaveNetLib {
 		return false;
 	}
 
-	void NFIPSec::LoadAllowIPZ(wchar_t* lpIPFileName)
+	void NFIPSec::LoadAllowIPZ([[maybe_unused]] wchar_t* lpIPFileName)
 	{
 		//TODO: 그냥 텍스트 파일 로딩 혹은 외부에서(DB or 웹서버) 정보를 가져오도록 한다.
 		/*
@@ -194,7 +194,7 @@ namespace NaveNetLib {
 		*/
 	}
 
-	void NFIPSec::LoadBlockIPZ(wchar_t* lpIPFileName)
+	void NFIPSec::LoadBlockIPZ([[maybe_unused]] wchar_t* lpIPFileName)
 	{
 		//TODO: 그냥 텍스트 파일 로딩 혹은 외부에서(DB or 웹서버) 정보를 가져오도록 한다.
 		/*

@@ -23,7 +23,7 @@ public:
 
 	//------------------------ ¸â ¹ö º¯ ¼ö -------------------------//
 protected:
-	void  (TestConnection::*OnMsgMap[MaxPacket])(char* Packet, int Len);
+	void  (TestConnection::*OnMsgMap[(int)PACKETLIST::MaxPacket])(char* Packet, int Len);
 
 	void OnConnect(bool bConnect);
 	void OnDisconnect();

@@ -97,7 +97,7 @@ namespace NaveNetLib {
 	}
 
 	// Size만큼 데이타를 읽어 Buffer에 쓴다.
-	int	NFIOBuffer::GetData(char* Buffer, int Size)
+	int	NFIOBuffer::WriteData(char* Buffer, int Size)
 	{
 		// 써있는 데이타 보다 많이 읽으면 써있는 데이타만 읽게 한다.
 		if (GetBufferUsed() < Size) {
@@ -173,12 +173,12 @@ namespace NaveNetLib {
 		DeleteIOBuf();
 	}
 
-	void NFPacketIOBuffer::Lock()
+	void NFPacketIOBuffer::SetWriteStartMark()
 	{
 		m_iLockHead = GetHead();
 	}
 
-	void NFPacketIOBuffer::UnLock()
+	void NFPacketIOBuffer::SetWriteEndMark()
 	{
 		SetHead(m_iLockHead);
 	}
@@ -196,7 +196,7 @@ namespace NaveNetLib {
 			return false;
 		}
 
-		if(auto size = GetData((char*)&header, HeaderSize); size != HeaderSize)
+		if(auto size = WriteData((char*)&header, HeaderSize); size != HeaderSize)
 		{
 			// 헤더를 원래대로 초기화 한다.
 	//		throw "NFPacketIOBuffer::GetPacket : Packet Header Size != P_SIZE";
@@ -223,7 +223,7 @@ namespace NaveNetLib {
 		return true;
 	}
 
-	int NFPacketIOBuffer::GetPacket(NFPacket* Packet)
+	int NFPacketIOBuffer::WritePacket(NFPacket* Packet)
 	{
 		int oldHead = GetHead();
 		int HeaderSize = HEADERSIZE;
@@ -236,7 +236,7 @@ namespace NaveNetLib {
 			return -1;
 		}
 
-		if(HeaderSize != GetData((char*)&Packet->m_Header, HeaderSize))
+		if(HeaderSize != WriteData((char*)&Packet->m_Header, HeaderSize))
 		{
 			// 헤더를 원래대로 초기화 한다.
 			SetHead(oldHead);
@@ -256,7 +256,7 @@ namespace NaveNetLib {
 		}
 
 		// 아직 데이타가 제대로 처리안됐다.
-		if(auto size = GetData(Packet->m_Packet, PacketSize); size != PacketSize)
+		if(auto size = WriteData(Packet->m_Packet, PacketSize); size != PacketSize)
 		{
 			// 헤더를 원래대로 초기화 한다.
 			SetHead(oldHead);

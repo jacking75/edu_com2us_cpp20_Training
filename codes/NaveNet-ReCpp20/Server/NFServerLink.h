@@ -42,7 +42,7 @@ namespace NaveNetLib
 		virtual bool			DispatchPacket( LPOVERLAPPEDPLUS lpOverlapPlus, NFUpdateManager* pUpdateManager);
 
 		// 실제 패킷을 처리하는 부분이다.
-		virtual void		DispatchPacket( NFPacket& Packet ) 
+		virtual void		DispatchPacket([[maybe_unused]] NFPacket& Packet )
 		{
 			// Nave::Sync::CSSync Live(&m_Sync);
 		};
