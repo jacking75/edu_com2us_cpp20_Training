@@ -92,7 +92,7 @@
     
 	
 ### Concurrency
-- std::stop_token and std::jthread: (2020.01.20) Visual C++은 곧 출시 예정인 Visual Studio 16.9에서 지원 예정 
+- Visual C++은 곧 출시 예정인 Visual Studio 16.9부터 지원 
   
 - [Concurrency in C++20 and beyond (pdf)](https://github.com/CppCon/CppCon2019/blob/master/Presentations/concurrency_in_cpp20_and_beyond/concurrency_in_cpp20_and_beyond__anthony_williams__cppcon_2019.pdf  ) 
 - [thread Extensions in C++20](./thread_extensionCpp20.md)
