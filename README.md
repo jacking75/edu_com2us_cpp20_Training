@@ -17,6 +17,7 @@
 - [C++20 - 새로운 문법, 표준 라이브러리 기능 소개](https://blog.naver.com/kmc7468/221708166955 )
 - [Marc Gregoire’s Blog - Slides of My Presentations at CppCon 2020](http://www.nuonsoft.com/blog/2020/10/22/slides-of-my-presentations-at-cppcon-2020/ )
 - [Slides for Meeting C++ 2019: C++20: The small things](https://meetingcpp.com/mcpp/slides/2019/talk.pdf  )
+- [All C++20 core language features with examples](https://oleksandrkvl.github.io/2021/04/02/cpp-20-overview.html )
 
     
   
