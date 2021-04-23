@@ -194,7 +194,7 @@ int main() {
 - [C++20 Ranges, Projections, std::invoke and if constexpr](https://www.bfilipek.com/2020/10/understanding-invoke.html )
 - [C++20: The Ranges Library](http://www.modernescpp.com/index.php/c-20-the-ranges-library )
 - [A custom C++20 range view](https://mariusbancila.ro/blog/2020/06/06/a-custom-cpp20-range-view/ )
-
+- [range: Express one of multiple options in a nice way](https://mariusbancila.ro/blog/2021/03/18/express-one-of-multiple-options-in-a-nice-way/ )
 
 
   

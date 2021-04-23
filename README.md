@@ -100,12 +100,11 @@
 - [C++ Synchronized Buffered Ostream std::osyncstream](https://docs.google.com/document/d/1-XIeNmpZhY2fGl2L8ySQit0HlkmtnuH-hyr_FTDlD04/edit?usp=sharing  )
   
      
-### std::Range
+### [std::Range](./ranges.md)
 - (2020.01.20) Visual C++은 Visual Studio 16.8에서 대부분 구현   
   
-- [Ranges](./ranges.md)
-
-
+  
+  
 ### Concepts  
 - (2020.01.20) Visual C++은 Visual Studio 16.3에서 일부 구현
   
