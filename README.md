@@ -137,6 +137,7 @@
 - (working)続・モジュール / Introduction to C++ modules (part 2) https://www.slideshare.net/TetsuroMatsumura/introduction-to-c-modules-part-2-225829715   
 - (working)モジュールへの移行を考える 3 - 複数ヘッダファイル+単一ソースファイル  https://zenn.dev/onihusube/articles/98a0fce9827fa87a88d3    
 - (working)C＋＋20のモジュールとincludeの違いについて詳しく調べてみた  https://logicalbeat.jp/blog/6223/ 
+- [예제 코드 VisualStudioCppModulesTesting](https://github.com/TomTheFurry/VisualStudioCppModulesTesting)
   
   
   
