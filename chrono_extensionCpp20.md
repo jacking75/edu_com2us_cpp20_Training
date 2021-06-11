@@ -342,3 +342,4 @@ assert( premium_friday(2018y/4) == 2018y/4/27d );
 - http://d.hatena.ne.jp/yohhoy/20180322/p1 
 - http://d.hatena.ne.jp/yohhoy/20180326/p1 
 - https://qiita.com/yohhoy/items/8e751b019b369693f0f3 
+- https://devblogs.microsoft.com/cppblog/cpp20s-extensions-to-chrono-available-in-visual-studio-2019-version-16-10/

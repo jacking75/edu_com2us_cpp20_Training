@@ -71,9 +71,6 @@
 	
 
 ### constexpr, consteval, constinit
-- consteval: (2020.01.20) Visual C++은 Visual Studio 16.8에서 일부 구현
-- constinit: (2020.01.20) 아직 미구현  
-  
 - [constexpr을 넘어선 consteval](https://blog.naver.com/nsun527/221834432741 )
 - [constexpr, consteval, constinit](https://blog.naver.com/kmc7468/221705880457 )
 - [(일어) constinit, consteval, constexpr, const 차이](https://gununu.hatenadiary.jp/entry/2019/10/15/020903   )  
@@ -93,21 +90,16 @@
     
 	
 ### Concurrency
-- Visual C++은 곧 출시 예정인 Visual Studio 16.9부터 지원 
-  
 - [Concurrency in C++20 and beyond (pdf)](https://github.com/CppCon/CppCon2019/blob/master/Presentations/concurrency_in_cpp20_and_beyond/concurrency_in_cpp20_and_beyond__anthony_williams__cppcon_2019.pdf  ) 
 - [thread Extensions in C++20](./thread_extensionCpp20.md)
 - [C++ Synchronized Buffered Ostream std::osyncstream](https://docs.google.com/document/d/1-XIeNmpZhY2fGl2L8ySQit0HlkmtnuH-hyr_FTDlD04/edit?usp=sharing  )
   
      
 ### [std::Range](./ranges.md)
-- (2020.01.20) Visual C++은 Visual Studio 16.8에서 대부분 구현   
-  
+ 
   
   
 ### Concepts  
-- (2020.01.20) Visual C++은 Visual Studio 16.3에서 일부 구현
-  
 - [Concepts ( 콘셉트, 개념 ) - 1](https://openmynotepad.tistory.com/69 )
 - [Concepts ( 콘셉트, 개념 ) - 2](https://openmynotepad.tistory.com/70 )
 - [Concepts ( 콘셉트, 개념 ) - 3](https://openmynotepad.tistory.com/71 )
@@ -142,12 +134,12 @@
   
   
 ### std::format
-(2021.01.14) 아직 컴파일러에서 구현하지 않았음  
-  
 - [printf 쓰지 마세요! std::format](https://karupro.tistory.com/12 )
 - [std::format](https://blog.naver.com/kmc7468/221707892020 )
 - [std::format 사용해보기(?)](https://blog.naver.com/nortul/222092094688 )
 - [An Extraterrestrial Guide to C++20 Text Formatting](https://www.bfilipek.com/2020/02/extra-format-cpp20.html  )  
+- [C++20の文字列フォーマットライブラリ std::format](https://qiita.com/tetsurom/items/e660c7aaf008d8a1e904)
+- [C++20期待の新機能std::formatを試してみる](https://qiita.com/chromia/items/111205cd5d33d847ab45)
     
 	
   	 
