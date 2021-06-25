@@ -11,7 +11,7 @@
     - https://cpprefjp.github.io/
   
   
-### Features Summary
+## Features Summary
 - [C++20 Key Features Summary](https://www.slideshare.net/utilforever/c20-key-features-summary )
 - [C++ Korea C++20 스터디 자료](https://github.com/CppKorea/Cpp20Study )
 - [C++20 - 새로운 문법, 표준 라이브러리 기능 소개](https://blog.naver.com/kmc7468/221708166955 )
@@ -22,7 +22,7 @@
     
   
   
-### 작지만 유용한 기능들
+## 작지만 유용한 기능들
 - [Designated Initializer ( 지정된 초기화 )](https://openmynotepad.tistory.com/64 )
 - [수학 상수](https://blog.naver.com/kmc7468/221843531555 )  
 - [선택문 최적화를 위한 [[likely]], [[unlikely]] ](https://blog.naver.com/nsun527/221834414761 )
@@ -58,7 +58,7 @@
   
   
   
-### Lambda
+## Lambda
 - [제너릭 람다의 템플릿 구문](https://wandbox.org/permlink/8kcCAfMugsmqsyaF )
      - [Template Parameter for Lambdas](http://www.modernescpp.com/index.php/more-powerful-lambdas-with-c-20  ) 
 - [상태를 가지지 않는 람다식은 default 생성, 대입 가능](https://wandbox.org/permlink/hdz8PseVtgk30BEP )
@@ -66,11 +66,11 @@
     
    
     
-### Span 
+## Span 
 - 작업 문서 링크할 예정    
 	
 
-### constexpr, consteval, constinit
+## constexpr, consteval, constinit
 - [constexpr을 넘어선 consteval](https://blog.naver.com/nsun527/221834432741 )
 - [constexpr, consteval, constinit](https://blog.naver.com/kmc7468/221705880457 )
 - [(일어) constinit, consteval, constexpr, const 차이](https://gununu.hatenadiary.jp/entry/2019/10/15/020903   )  
@@ -78,28 +78,28 @@
   
 	  
 	  
-### Chrono 
+## Chrono 
 - [chrono Extensions in C++20](./chrono_extensionCpp20.md)
 - [Calendar and Time-Zones in C++20: Time of Day](http://www.modernescpp.com/index.php/calendar-and-time-zone-in-c-20 )
   
   
   
-### std::Bit 
+## std::Bit 
 - [bit](./bit.md)
       
     
 	
-### Concurrency
+## Concurrency
 - [Concurrency in C++20 and beyond (pdf)](https://github.com/CppCon/CppCon2019/blob/master/Presentations/concurrency_in_cpp20_and_beyond/concurrency_in_cpp20_and_beyond__anthony_williams__cppcon_2019.pdf  ) 
 - [thread Extensions in C++20](./thread_extensionCpp20.md)
 - [C++ Synchronized Buffered Ostream std::osyncstream](https://docs.google.com/document/d/1-XIeNmpZhY2fGl2L8ySQit0HlkmtnuH-hyr_FTDlD04/edit?usp=sharing  )
   
      
-### [std::Range](./ranges.md)
+## [std::Range](./ranges.md)
  
   
   
-### Concepts  
+## Concepts  
 - [Concepts ( 콘셉트, 개념 ) - 1](https://openmynotepad.tistory.com/69 )
 - [Concepts ( 콘셉트, 개념 ) - 2](https://openmynotepad.tistory.com/70 )
 - [Concepts ( 콘셉트, 개념 ) - 3](https://openmynotepad.tistory.com/71 )
@@ -114,7 +114,7 @@
   
       
       
-### module
+## module
 - (working)C++ にモジュールがやってくる！   http://secret-garden.hatenablog.com/entry/2019/12/23/212339 
 - [module 사용해보기](https://speedr00t.tistory.com/768 )
 - [A Tour of C++ Modules in Visual Studio](https://devblogs.microsoft.com/cppblog/a-tour-of-cpp-modules-in-visual-studio/ )
@@ -131,19 +131,150 @@
 - (working)C＋＋20のモジュールとincludeの違いについて詳しく調べてみた  https://logicalbeat.jp/blog/6223/ 
 - [예제 코드 VisualStudioCppModulesTesting](https://github.com/TomTheFurry/VisualStudioCppModulesTesting)
   
+<br>    
+<br>    
+  
+## std::format
+  
+### 도입
+- Visual Studio 2019 16.10.0 이상 필요
+- C++ 프로젝트의 속성에서 "C++ 표준"을 "미리보기 - 최신 C++ Working Draft의 기능 (/std:c++ latest)"로 설정
   
   
-### std::format
+### 기본
+라이브러리 `format`를 포함하면 사용할 수 있다.   
+```
+#include <iostream>
+#include <format>
+
+int main()
+{
+    using namespace std;
+    cout << format("Hello {}!", "std::format") << endl;
+}
+```  
+<pre>  
+Hello std::format!
+</pre>    
+    
+  
+## 예외
+`std::format`은 형식이나 인수가 잘못된 경우 런타임 예외 `std::format_error`를 발생시킨다.  
+```
+try {
+    // 1개만 인수가 있는데 두 번째를 사용하려고 하면
+    cout << format("{1}", 0) << endl;
+}
+catch (const format_error& e)
+{
+    cout << e.what() << endl;
+}
+```
+↓  
+Argument not found.
+  
+  
+- 서식 문자열이 잘못된 경우에도 예외가 발생한다.
+    ```
+    format("{$324i0-g}", 0)
+    ```  
+    Invalid format string.
+- 서식에서 지정한 형식과 인수의 타입이 다른 경우도 예외가 발생한다.
+    ```
+    format("{:d}", 4.0f)
+    ```  
+    invalid floating point type   
+    
+    ```  
+    format("{:f}", 42)
+    ```  
+    invalid integral type  
+- fill 지정에 `{` 나 `}` 를 사용하면 오류가 발생한다 (다른 문자는 사용 가능).
+    ```
+    format("{:{>10}", 42)
+    ```  
+    invalid fill character '{'   
+    
+    ```  
+    format("{:}>10}", 42)
+    ```  
+    Unmatched '}' in format string.  
+- 부동 소수점 숫자 이외에서 precision 지정은 할 수 없다.  
+    ```
+    format("{:6.3}", 42)
+    ```  
+    Precision not allowed for this argument type.
+    
+
+## 와이드 문자열
+물론 wchar_t 및 wstring에 대응하고 있기 때문에, 영어 이외도 처리할 수 있다   
+```
+#include <iostream>
+#include <format>
+#include <locale>
+
+int main()
+{
+    using namespace std;
+    setlocale(LC_CTYPE, "");
+    wcout << format(L"{}", L"안녕！") << endl;
+}
+```  
+안녕！
+
+  
+fill 지정에도 와이드 문자는 사용할 수 있지만, 기대한 동작은 되지 않는 것 같다.  
+```
+wcout << format(L"{:あ^20}", L"中央寄せ") << endl;
+```  
+ああああああ中央寄せああああああ  // 'あ'が幅1として扱われている？(2*4+12=20)
+
+<br>  
+      
+## 서식 지정 치트 시트
+|     설명                                     |     기술                                |     결과            |
+|----------------------------------------------|-----------------------------------------|---------------------|
+|     1개                                      |     format("{}",   1)                   |     1               |
+|     2개                                      |     format("{}   {}", 1, 2)             |     1 2             |
+|     3개                                      |     format("{}   {} {}", 1, 2, 3)       |     1 2   3         |
+|     순서 지정                                |     format("{2}   {1} {0}", 1, 2, 3)    |     3 2   1         |
+|     문자(c는 생략 가능)                       |     format("{:c}",   'C')               |     C               |
+|     문자열(s는 생략 가능)                        |     format("{:s}",   "C++")             |     C++             |
+|     bool                                     |     format("{}",   true)                |     true            |
+|     bool                                     |     format("{}",   false)               |     false           |
+|     정수(10진수,d생략 가능)                   |     format("{:d}",   42)                |     42              |
+|     정수(8진수)                              |     format("{:o}",   042)               |     42              |
+|     정수(16진수)                             |     format("{:x}",   0xab)              |     ab              |
+|     정수(16진수) 대문자                      |     format("{:X}",   0xab)              |     AB              |
+|     정수(16진수)   0x 붙음                    |     format("{:#x}",   0xab)             |     0xab            |
+|     정수(16진수)   0X 붙음                    |     format("{:#X}",   0xab)             |     0XAB            |
+|     정수(2진수)                              |     format("{:b}",   0b10101010)        |     10101010        |
+|     정수(2진수)   0b 붙음                     |     format("{:#b}",   0b10101010)       |     0b10101010      |
+|     정수(2진수)   0B 붙음                     |     format("{:#B}",   0b10101010)       |     0B10101010      |
+|     정수(정수에+)                            |     format("{:+d}",   42)               |     +42             |
+|     부동소수점수                             |     format("{:f}",   123.456789)        |     123.456789      |
+|     정도 지정                                 |     format("{:6.3f}",   123.456789)     |     123.457         |
+|     지수 표기(e)                              |     format("{:e}",   123.456789)        |     1.234568e+02    |
+|     지수 표기(E)                              |     format("{:E}",   123.456789)        |     1.234568E+02    |
+|     최적의 표기를 자동 판정  (g는 생략 가능)    |     format("{:g}",   123.456789)        |     123.457         |
+|     왼쪽 정렬                                   |     format("{:<12}",   "left")          |     left            |
+|     오른쪽 정렬                                   |     format("{:>12}",   "right")         |            right    |
+|     중앙 정렬                                 |     format("{:^12}",   "center")        |        center       |
+|     묻힐 문자를 지정한다                    |     format("{:!^12}",   "hello")        |     !!!hello!!!!    |
+     	
+        
+- [fmtlib과 std::format](https://docs.google.com/presentation/d/1F2B55zB34rswqFDMBWCKxLazdkEPhDdN9qmyD4PcbbU/edit?usp=sharing )
 - [printf 쓰지 마세요! std::format](https://karupro.tistory.com/12 )
 - [std::format](https://blog.naver.com/kmc7468/221707892020 )
 - [std::format 사용해보기(?)](https://blog.naver.com/nortul/222092094688 )
 - [An Extraterrestrial Guide to C++20 Text Formatting](https://www.bfilipek.com/2020/02/extra-format-cpp20.html  )  
-- [C++20の文字列フォーマットライブラリ std::format](https://qiita.com/tetsurom/items/e660c7aaf008d8a1e904)
-- [C++20期待の新機能std::formatを試してみる](https://qiita.com/chromia/items/111205cd5d33d847ab45)
-    
-	
-  	 
-### Template
+- [(일어) C++20 문자열 포맷 라이브러리 std::format](https://qiita.com/tetsurom/items/e660c7aaf008d8a1e904)
+      
+  
+<br>    
+<br>    
+    	 
+## Template
 - [auto 파라메터에 의한 함ㅅ후 템플릿 간이 정의](https://wandbox.org/permlink/L4rPlrtsT6aK1d25 )
     - C++14에서 도입된 제너릭 람다처럼 보통 함수도 파라메터 타입을 auto로 하여 간단하게 함수 템플릿을 정의할 수 있다.
     - 아래의 제한이 있다.
@@ -154,14 +285,14 @@
   
   
 
-### iterator
+## iterator
 - [(일어) C++20에서 iterator 행동 조사 방법](https://onihusube.hatenablog.com/entry/2020/12/11/000123 )
 - [(일어) C++20에서의 iterator_traits 사정](https://onihusube.hatenablog.com/entry/2020/12/14/002822  )
 - [(일어) C++17 iterator <=> C++20 iterator != 0](https://onihusube.hatenablog.com/entry/2020/12/27/150400  )
   
   
   
-### Coroutine
+## Coroutine
 - [Coroutine ( 코루틴 ) - 1](https://openmynotepad.tistory.com/65 )
 - [Coroutine ( 코루틴 ) - 2](https://openmynotepad.tistory.com/66 )
 - [Coroutine ( 코루틴 ) - 3](https://openmynotepad.tistory.com/67 )
