@@ -293,10 +293,10 @@ wcout << format(L"{:あ^20}", L"中央寄せ") << endl;
 - Practical C++ Modules [pdf](https://github.com/CppCon/CppCon2019/blob/master/Presentations/practical_cpp_modules/practical_cpp_modules__boris_kolpackov__cppcon_2019.pdf )
 - [Modules in VC++ 2019 16.5](https://mariusbancila.ro/blog/2020/05/07/modules-in-vc-2019-16-5/ )
 - [C++20: A Simple math Module](http://www.modernescpp.com/index.php/cpp20-a-first-module )  
-- (working)モジュール理論 基礎編  https://onihusube.hatenablog.com/entry/2019/07/07/025446  
 - (working)C++20 モジュールの概要 / Introduction to C++ modules (part 1) https://www.slideshare.net/TetsuroMatsumura/c20-152189285 
 - (working)続・モジュール / Introduction to C++ modules (part 2) https://www.slideshare.net/TetsuroMatsumura/introduction-to-c-modules-part-2-225829715   
 - (working)C＋＋20のモジュールとincludeの違いについて詳しく調べてみた  https://logicalbeat.jp/blog/6223/ 
+- [(일어) 모듈 이론 기초편](https://onihusube.hatenablog.com/entry/2019/07/07/025446  )  
 - (일어) 모듈로의 이행 시 생각해볼 것: [단일 헤더 파일+단일 소스 파일](https://zenn.dev/onihusube/articles/299ed7a3bc6062068fdd) | [구현 은폐에 대해서](https://zenn.dev/onihusube/articles/7f1a6253b0683458b9d0) | [복수 헤더 파일 + 복수 소스 파일](https://zenn.dev/onihusube/articles/98a0fce9827fa87a88d3) | [단일 헤더 파일 + 복수 소스 파일](https://zenn.dev/onihusube/articles/0202ca564da2c3f5f98a )
     
 <br/>  
