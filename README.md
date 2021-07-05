@@ -301,6 +301,13 @@ wcout << format(L"{:あ^20}", L"中央寄せ") << endl;
 <br/>  
 <br/>  
    
+## 활용 
+- [Writing a simple logging function in C++20](https://mariusbancila.ro/blog/2021/07/03/writing-a-simple-logging-function-in-c20/  )
+  
+      
+<br/>  
+<br/>  
+   
 ## 실습 
 - [Modernizing legacy code](https://mariusbancila.ro/blog/2021/01/15/modernizing-legacy-code/ )  
 - IOCP 네트워크 라이브러리: codes/NaveNet-ReCpp20
