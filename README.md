@@ -67,9 +67,13 @@
    
     
 ## Span 
-- 작업 문서 링크할 예정    
-	
-
+- 메모리의 일부분을 소유권은 없이, 참조하는 클래스
+    - 배열이나 std::vector의 일부 연속적인 요소를 추출하고, 이 요소들에만 처리를 적용하는 목적으로 사용한다.
+- 비슷한 것으로 std::basic_string_view 가 있지만 이것은 문자열에 특화된 것이고, span은 메모리 연속성을 가진 모든 컨테이너에 사용할 수 있다.
+    - 메모리 연속성이 없는 list, unordered_map 등은 사용 불가
+- [설명 문서](https://docs.google.com/presentation/d/1bC_V1_wQsRL-N7igEc_JH_pWqfXMqmZkUMEYF9WKwZ0/edit?usp=sharing) 
+	 
+  
 ## constexpr, consteval, constinit
 - [constexpr을 넘어선 consteval](https://blog.naver.com/nsun527/221834432741 )
 - [constexpr, consteval, constinit](https://blog.naver.com/kmc7468/221705880457 )
@@ -257,7 +261,7 @@ wcout << format(L"{:あ^20}", L"中央寄せ") << endl;
 <br>    
     	 
 ## Template
-- [auto 파라메터에 의한 함ㅅ후 템플릿 간이 정의](https://wandbox.org/permlink/L4rPlrtsT6aK1d25 )
+- [auto 파라메터에 의한 함수 템플릿 간이 정의](https://wandbox.org/permlink/L4rPlrtsT6aK1d25 )
     - C++14에서 도입된 제너릭 람다처럼 보통 함수도 파라메터 타입을 auto로 하여 간단하게 함수 템플릿을 정의할 수 있다.
     - 아래의 제한이 있다.
         - 파라메터 타입에 decltype(auto)은 사용할 수 없다
