@@ -121,7 +121,7 @@ concept view =
 template<class D>
   requires is_class_v<D> && same_as<D, remove_cv_t<D>>
 class view_interface : public view_base {
-  // 略
+  // 생략
 };
 ```
    
@@ -187,6 +187,7 @@ int main() {
    
   
 ## 참고 사이트
+- [C++20 std::ranges::views <-> vector 사용 예](https://docs.google.com/document/d/1jvo5_zKOXA5jQIbTfHOhdjXZZd2n1eF9yEDGQUqI68I/edit?usp=sharing )
 - [(일어) 범위 라이브러리](https://ja.cppreference.com/w/cpp/ranges )
 - [(일어)C++20 Range 라이브러리의 강력한 기능, 프로젝션](https://cpplover.blogspot.com/2019/01/c20range.html  )
 - [(pdf) From Iterators To Ranges](http://becpp.org/blog/wp-content/uploads/2019/10/Arno-Schoedl-From-Iterators-To-Ranges.pdf )
