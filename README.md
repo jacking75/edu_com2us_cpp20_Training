@@ -290,8 +290,10 @@ wcout << format(L"{:あ^20}", L"中央寄せ") << endl;
 <br>          
       
 ## module
+- [모듈(module)](https://kukuta.tistory.com/389 )
 - C++20 Modules 소개와 사용 - [1](https://openmynotepad.tistory.com/78)   [2](https://openmynotepad.tistory.com/79)
 - [모듈에 대해서](https://docs.google.com/document/d/18USNv9vlIvuzURRjS44QzqdgM9mEicLm06FevA3FpfU/edit?usp=sharing )
+- [당신이 module을 써야만 하는 이유](https://kukuta.tistory.com/393 )
 - [MS Docs C++ 모듈 개요](https://docs.microsoft.com/ko-kr/cpp/cpp/modules-cpp?view=msvc-160)
 - [A Tour of C++ Modules in Visual Studio](https://devblogs.microsoft.com/cppblog/a-tour-of-cpp-modules-in-visual-studio/ )
 - [Standard C++20 Modules support with MSVC in Visual Studio 2019 version 16.8](https://devblogs.microsoft.com/cppblog/standard-c20-modules-support-with-msvc-in-visual-studio-2019-version-16-8/ )
