@@ -386,3 +386,6 @@ struct X { ~X() {} };
 static_assert( !is_lock_free<X>, "X is not lock-free" );  // OK
 ```  
       
+	  
+## 참고
+- [C++ Standard concepts diagrams](https://github.com/yohhoy/cpp-concepts/blob/main/README.md)	  
