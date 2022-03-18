@@ -11,7 +11,7 @@
     - https://cpprefjp.github.io/
   
   
-## Features Summary
+## Features Summary  
 - [C++20 Key Features Summary](https://www.slideshare.net/utilforever/c20-key-features-summary )
 - [C++ Korea C++20 스터디 자료](https://github.com/CppKorea/Cpp20Study )
 - [C++20 - 새로운 문법, 표준 라이브러리 기능 소개](https://blog.naver.com/kmc7468/221708166955 )
