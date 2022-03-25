@@ -86,6 +86,7 @@
 ## Chrono 
 - [chrono Extensions in C++20](./chrono_extensionCpp20.md)
 - [Calendar and Time-Zones in C++20: Time of Day](http://www.modernescpp.com/index.php/calendar-and-time-zone-in-c-20 )
+- [(일어) 시간 계산과 달력 계산은 다르다! 완전 다르다!](https://qiita.com/yohhoy/items/d1f9004c66cc6ff15774 )
   
   
   
