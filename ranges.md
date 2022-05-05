@@ -196,6 +196,6 @@ int main() {
 - [C++20: The Ranges Library](http://www.modernescpp.com/index.php/c-20-the-ranges-library )
 - [A custom C++20 range view](https://mariusbancila.ro/blog/2020/06/06/a-custom-cpp20-range-view/ )
 - [range: Express one of multiple options in a nice way](https://mariusbancila.ro/blog/2021/03/18/express-one-of-multiple-options-in-a-nice-way/ )
-
+- [(일어) ranges의 파이프에 어댑터 할 때는](https://onihusube.hatenablog.com/entry/2022/04/24/010041 )
 
   
