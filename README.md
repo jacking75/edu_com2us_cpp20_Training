@@ -291,23 +291,8 @@ wcout << format(L"{:あ^20}", L"中央寄せ") << endl;
 <br>    
 <br>          
       
-## module
-- [모듈(module)](https://kukuta.tistory.com/389 )
-- C++20 Modules 소개와 사용 - [1](https://openmynotepad.tistory.com/78)   [2](https://openmynotepad.tistory.com/79)
-- [모듈에 대해서](https://docs.google.com/document/d/18USNv9vlIvuzURRjS44QzqdgM9mEicLm06FevA3FpfU/edit?usp=sharing )
-- [당신이 module을 써야만 하는 이유](https://kukuta.tistory.com/393 )
-- [MS Docs C++ 모듈 개요](https://docs.microsoft.com/ko-kr/cpp/cpp/modules-cpp?view=msvc-160)
-- [A Tour of C++ Modules in Visual Studio](https://devblogs.microsoft.com/cppblog/a-tour-of-cpp-modules-in-visual-studio/ )
-- [Standard C++20 Modules support with MSVC in Visual Studio 2019 version 16.8](https://devblogs.microsoft.com/cppblog/standard-c20-modules-support-with-msvc-in-visual-studio-2019-version-16-8/ )
-- Practical C++ Modules [pdf](https://github.com/CppCon/CppCon2019/blob/master/Presentations/practical_cpp_modules/practical_cpp_modules__boris_kolpackov__cppcon_2019.pdf )
-- [Modules in VC++ 2019 16.5](https://mariusbancila.ro/blog/2020/05/07/modules-in-vc-2019-16-5/ )
-- [C++20: A Simple math Module](http://www.modernescpp.com/index.php/cpp20-a-first-module )  
-- [(일어)C++20의 모듈과 include의 차이에 대해서 자세히 조사해 보았다](https://logicalbeat.jp/blog/6223/) 
-- [(일어) 모듈 이론 기초편](https://onihusube.hatenablog.com/entry/2019/07/07/025446  )  
-- (일어) 모듈로의 이행 시 생각해볼 것: [단일 헤더 파일+단일 소스 파일](https://zenn.dev/onihusube/articles/299ed7a3bc6062068fdd) | [구현 은폐에 대해서](https://zenn.dev/onihusube/articles/7f1a6253b0683458b9d0) | [복수 헤더 파일 + 복수 소스 파일](https://zenn.dev/onihusube/articles/98a0fce9827fa87a88d3) | [단일 헤더 파일 + 복수 소스 파일](https://zenn.dev/onihusube/articles/0202ca564da2c3f5f98a )
-- (일어) C++ 모듈 인터페이스 파티션 사용처 [1](https://zenn.dev/uyamae/articles/0acaee53777832 )  [2](https://zenn.dev/uyamae/articles/51074bc5cff43b )
-
-  
+## [module](./READEME.md)
+    
 <br/>  
 <br/>  
    
