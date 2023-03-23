@@ -1,7 +1,4 @@
-//https://zenn.dev/onihusube/articles/0202ca564da2c3f5f98a
 
-// 인터페이스는 1개의 파일에 구현 부분은 복수 파일로 할 수 있음
-// 구현 파티션으로 나눈다.
 
 
 export module mylib;  // mylib 모듈 인터페이스 단위 선언

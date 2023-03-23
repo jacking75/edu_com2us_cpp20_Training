@@ -1,4 +1,9 @@
-﻿import mylib; // mylib 모듈 import 선언
+﻿//https://zenn.dev/onihusube/articles/299ed7a3bc6062068fdd
+
+// 모두 한번에 export 하기
+
+
+import mylib; // mylib 모듈 import 선언
 
 int main() 
 {

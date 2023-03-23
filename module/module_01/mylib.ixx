@@ -1,6 +1,3 @@
-//https://zenn.dev/onihusube/articles/299ed7a3bc6062068fdd
-
-
 export module mylib;  // mylib 모듈 인터페이스 단위 선언
 
 namespace mylib { 

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="shop">
+      <UniqueIdentifier>{7ae9fa45-d13b-44f7-a835-483755e168ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="types">
+      <UniqueIdentifier>{92b13ff6-a4d4-4475-860f-65091431b3e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{f5b12315-1245-4fd5-89bd-db74883f14e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="util\util.ixx">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="types\types.ixx">
+      <Filter>types</Filter>
+    </ClCompile>
+    <ClCompile Include="shop\shop.ixx">
+      <Filter>shop</Filter>
+    </ClCompile>
+    <ClCompile Include="shop\shop-unit.cpp">
+      <Filter>shop</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+</Project>

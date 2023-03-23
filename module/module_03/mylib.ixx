@@ -1,6 +1,4 @@
-//https://zenn.dev/onihusube/articles/299ed7a3bc6062068fdd
 
-// 모두 한번에 export 하기
 
 export module mylib;  // mylib 모듈 인터페이스 단위 선언
 

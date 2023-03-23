@@ -1,4 +1,7 @@
-﻿import mylib; // mylib 모듈 import 선언
+﻿//https://zenn.dev/onihusube/articles/299ed7a3bc6062068fdd
+// 간단한 모듈 사용 예
+
+import mylib; // mylib 모듈 import 선언
 
 int main() 
 {
