@@ -27,6 +27,14 @@
   
 <br>  
    
+## 추가 BMI 디렉터리
+지시문에 전달된 import 이름을 확인하기 위해 검색할 하나 이상의 디렉터리를 지정한다.  
+둘 이상이 있는 경우 세미콜론('';)을 사용하여 디렉터리를 구분한다.   
+명령어로 할 때는 `/ifcSearchDir[path]` 컴파일러 옵션을 설정한다.  
+    
+![BMI(./images/001.png)    
+   
+    
 ## 참조
 - [모듈에 대해서](https://docs.google.com/document/d/18USNv9vlIvuzURRjS44QzqdgM9mEicLm06FevA3FpfU/edit?usp=sharing )
 - [모듈(module)](https://kukuta.tistory.com/389 )
