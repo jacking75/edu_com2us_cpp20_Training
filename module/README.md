@@ -1,7 +1,7 @@
 # module
   
 ## 모듈의 도입 이유  
-프리프로세서(preprocessor)인 include는 헤더 파일의 내용을 그 장소에 전개한다. 이것은 아래와 같은 문제가 지적된다.    
+프리프로세서(preprocessor, 전처리기)인 include는 헤더 파일의 내용을 그 장소에 전개한다. 이것은 아래와 같은 문제가 지적된다.    
   
 1. 컴파일 시간이 길어진다.  
     헤더 파일 내용이 재귀적으로 전개되어, 프로그램이 길어진다(Hello world 만으로도 수만행에 달한다)  
@@ -51,5 +51,5 @@
 - [(일어) 모듈 이론 기초편](https://onihusube.hatenablog.com/entry/2019/07/07/025446  )  
 - (일어) C++ 모듈 인터페이스 파티션 사용처: [1](https://zenn.dev/uyamae/articles/0acaee53777832 )  [2](https://zenn.dev/uyamae/articles/51074bc5cff43b )
 - [Example project for C++20 module support in CMake](https://github.com/calgray/cmake-cpp-modules-template )
-
+- [Moving a project to C++ named Modules](https://devblogs.microsoft.com/cppblog/moving-a-project-to-cpp-named-modules/ )
    
