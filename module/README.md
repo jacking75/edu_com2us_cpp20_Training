@@ -52,4 +52,4 @@
 - (일어) C++ 모듈 인터페이스 파티션 사용처: [1](https://zenn.dev/uyamae/articles/0acaee53777832 )  [2](https://zenn.dev/uyamae/articles/51074bc5cff43b )
 - [Example project for C++20 module support in CMake](https://github.com/calgray/cmake-cpp-modules-template )
 - [Moving a project to C++ named Modules](https://devblogs.microsoft.com/cppblog/moving-a-project-to-cpp-named-modules/ )
-   
+- [C++20 Modules Status Report](https://github.com/royjacobson/modules-report  )  
